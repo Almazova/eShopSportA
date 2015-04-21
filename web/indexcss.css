@@ -1,0 +1,206 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20.04.2015, 21:18:05
+    Author     : asus
+*/
+
+@charset "utf-8";
+/* CSS Document */
+* {margin:0;padding:0}
+html,body {height:100%;}
+body {background-color:#aaa;}
+
+#header {
+    background-color:#fc6;	
+    color:#030;
+    z-index:5;
+    height:50px;
+    position:fixed;
+    margin:auto;
+    min-width:790px;max-width:1400px;
+    left: 15%;
+    width:100%;	
+
+}
+h1{
+    font-family:"Times New Roman",Times,serif;
+    size: 16px;
+    text-align:center;
+
+}
+#footer {
+    background-color:#fc6;	
+    height:50px;
+    z-index:5;
+    position:fixed; /* параметр, при помощи которого мы фиксируем div-блок */
+    bottom:0px; /*указываем отступ от нижней части страницы = 0px, т.е. убираем его вообще*/
+    min-width:790px;max-width:1400px;
+    left: 15%;
+    width:100%;
+    text-align:center;
+
+}
+#middle {
+    background-color:#fff;	
+    overflow:hidden;
+    min-height:100%;
+    padding-bottom:100px; 
+    padding-top:60px;
+
+    position:relative;
+    z-index:4;
+    min-width:790px;max-width:1400px;
+    left: 15%;
+    width:100%;
+}
+*html #middle {
+    overflow:visible;
+    height:100%;
+}
+#content,#left {
+    overflow-x:hidden;
+    position:relative;
+    z-index:1;
+}
+#content {
+    float:left;
+
+    left:0;
+    width:20%;
+}
+#left {
+    background-color:#e9e9e9;
+    float:right;
+
+    width:80%;
+}
+
+
+
+.left {
+    background:#e9e9e9;
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:80%;
+}
+html>body .left {top:0;}
+*html .left{height:1000em;}
+
+p{padding:7px;}
+
+/* Убираем отступы */
+/* Убираем отступы */
+*{
+    margin:0;
+    padding:0;
+}
+/* Задаем ширину меню */
+
+
+font{ 
+    font-family: Georgia;
+    text-shadow: 2px 2px 3px #000; 
+    font-family:"Times New Roman",Times,serif;
+
+}
+
+
+
+#quote{
+    background: #FCFCFC;            // Цвет фона внутри цитаты
+    border:#060 medium;
+    padding: 15px;
+    color: #333;
+    font-style: italic;             // Задаем стиль текста, здесь курсив
+    font-size: 14px;                // Размер текста
+
+    text-align:right;
+    display:inline-block;
+
+    margin:0 10% 5% 50%;
+    width:40%;
+}
+
+
+table {
+    margin:auto;
+    font-family:"Times New Roman",Times,serif;
+    font-size: 16px;
+    width: 800px;
+    text-align: left;
+    border-collapse: collapse;
+    margin:5% 10% 10% 15%;
+    border: 0;
+
+}
+th,caption {
+    font-size: 18px;
+    font-weight: normal;
+    border: 0;
+    padding: 8px;
+    text-align:center;
+}
+td {
+
+    border: 0;
+    padding: 8px;
+}
+
+#tableGoods{
+    margin:auto;
+    font-family:"Times New Roman",Times,serif;
+    font-size: 16px;
+    width: 250px;
+    text-align: left;
+    border-collapse: collapse;	
+    margin:10% 20% 10% 15%;
+    border: 4px solid  #0C9;
+
+}
+
+A {
+    color: #F63; /* Цвет ссылок */
+}
+A:visited {
+    color: #F90; /* Цвет посещенных ссылок */
+}
+A:active {
+    color: #F33; /* Цвет активных ссылок */
+}
+p.link{
+    position:absolute; 
+    right:20px; 
+    top: 0px; 
+}
+
+.menu {
+    margin:auto;
+    font-family:"Times New Roman",Times,serif;
+    font-size: 18pt;    
+    margin:0 20% 0 15%;
+    height:50px;
+    border-color:#c2e254 #9bb838 #9bb838 #c2e254;
+    border-style:solid;
+    border-width:1px;
+    background:#FFCC66;
+    cursor:pointer;
+    width: 230px;
+}
+
+.menu:hover {
+    border-color:#FFCC66 #FFFF99 #FFFF99 #FFCC66;
+    border-style:solid;
+    border-width:1px;
+    background:#FFFF99;
+}
+.menu:focus {
+    background:#ddd;
+    border-color:#ddd #333 #333 #ddd;
+    border-style:solid;
+    border-width:1px;
+}
