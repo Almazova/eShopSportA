@@ -60,7 +60,7 @@ public class Factory<T> {
                 deliveryMethodDao = new DeliveryMethodDaoImpl();
             }
             return deliveryMethodDao;
-        } else if (t.getClass() == Order.class) {
+        } else if (t.getClass() == Orders.class) {
             if (orderDao == null) {
                 orderDao = new OrderDaoImpl();
             }

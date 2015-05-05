@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -23,6 +25,27 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "goods")
+@NamedQueries({
+    @NamedQuery(name = "SELECT_BY_CATEGORY",
+            query = "from model.entity.Goods g where g.category.nameCategory = :nameCategory"),
+    @NamedQuery(name = "SELECT_BY_ONE_CLUB_AND_CATEGORY",
+            query = "from model.entity.Goods g where g.club.nameClub = :nameClub1 and g.category.nameCategory = :nameCategory"),
+    @NamedQuery(name = "SELECT_BY_TWO_CLUB_AND_CATEGORY",
+            query = "from model.entity.Goods g where (g.club.nameClub = :nameClub1 or"
+                    + " g.club.nameClub = :nameClub2) and g.category.nameCategory = :nameCategory"),
+    @NamedQuery(name = "SELECT_BY_THREE_CLUB_AND_CATEGORY",
+            query = "from model.entity.Goods g where (g.club.nameClub = :nameClub1 or"
+                    + " g.club.nameClub = :nameClub2 or g.club.nameClub = :nameClub3) and"
+                    + " g.category.nameCategory = :nameCategory")
+//    
+//    @NamedQuery(name = "HQL_SELECT_BETWEEN", query = "from Tea where number between :a and :b"),
+//    @NamedQuery(name = "HQL_SELECT_AMOUNT", query = "select count(*)from Tea where name =:name"),
+//    @NamedQuery(name = "HQL_SELECT_BETWEEN_PRICE", query = "from Tea where number >:a and price <:price"),
+//    @NamedQuery(name = "HQL_SELECT_BY_TYPE", query = "select tea from Tea as tea left join tea.typeTea as "
+//            + "typeTea where typeTea.typeTeaName = :typeTea"),
+//    @NamedQuery(name = "HQL_SELECT_AMOUNT_BT_TYPE", query = "select sum(tea.number) from Tea as tea left join "
+//            + "tea.typeTea as typeTea where typeTea.typeTeaName = :typeTea"),
+})
 public class Goods implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +59,10 @@ public class Goods implements Serializable {
     private long priceGoods;
     
     @Column(name = "information")
-    private String infomation;
+    private String information;
+    
+    @Column(name = "image")
+    private String image;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
@@ -50,14 +76,17 @@ public class Goods implements Serializable {
     public Goods() {
     }
 
-  
-    public Goods(String nameGoods, long priceGoods, String infomation, Category category, Club club) {
+    public Goods(String nameGoods, long priceGoods, String infomation, String image, Category category, Club club) {
         this.nameGoods = nameGoods;
         this.priceGoods = priceGoods;
-        this.infomation = infomation;
+        this.information = infomation;
+        this.image = image;
         this.category = category;
         this.club = club;
     }
+
+  
+    
 
     public Long getGoodsId() {
         return goodsId;
@@ -84,11 +113,11 @@ public class Goods implements Serializable {
     }
 
     public String getInfomation() {
-        return infomation;
+        return information;
     }
 
     public void setInfomation(String infomation) {
-        this.infomation = infomation;
+        this.information = infomation;
     }
 
     public Category getCategory() {
@@ -107,22 +136,24 @@ public class Goods implements Serializable {
         this.club = club;
     }
 
-    @Override
-    public String toString() {
-        return "Goods{" + "goodsId=" + goodsId + ", nameGoods=" + nameGoods + ", priceGoods=" 
-                + priceGoods + ", infomation=" + infomation + ", category=" + category + ", "
-                + "club=" + club + '}';
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.goodsId);
-        hash = 37 * hash + Objects.hashCode(this.nameGoods);
-        hash = 37 * hash + (int) (this.priceGoods ^ (this.priceGoods >>> 32));
-        hash = 37 * hash + Objects.hashCode(this.infomation);
-        hash = 37 * hash + Objects.hashCode(this.category);
-        hash = 37 * hash + Objects.hashCode(this.club);
+        int hash = 5;
+        hash = 59 * hash + (this.goodsId != null ? this.goodsId.hashCode() : 0);
+        hash = 59 * hash + (this.nameGoods != null ? this.nameGoods.hashCode() : 0);
+        hash = 59 * hash + (int) (this.priceGoods ^ (this.priceGoods >>> 32));
+        hash = 59 * hash + (this.information != null ? this.information.hashCode() : 0);
+        hash = 59 * hash + (this.image != null ? this.image.hashCode() : 0);
+        hash = 59 * hash + (this.category != null ? this.category.hashCode() : 0);
+        hash = 59 * hash + (this.club != null ? this.club.hashCode() : 0);
         return hash;
     }
 
@@ -135,27 +166,36 @@ public class Goods implements Serializable {
             return false;
         }
         final Goods other = (Goods) obj;
-        if (!Objects.equals(this.goodsId, other.goodsId)) {
+        if (this.goodsId != other.goodsId && (this.goodsId == null || !this.goodsId.equals(other.goodsId))) {
             return false;
         }
-        if (!Objects.equals(this.nameGoods, other.nameGoods)) {
+        if ((this.nameGoods == null) ? (other.nameGoods != null) : !this.nameGoods.equals(other.nameGoods)) {
             return false;
         }
         if (this.priceGoods != other.priceGoods) {
             return false;
         }
-        if (!Objects.equals(this.infomation, other.infomation)) {
+        if ((this.information == null) ? (other.information != null) : !this.information.equals(other.information)) {
             return false;
         }
-        if (!Objects.equals(this.category, other.category)) {
+        if ((this.image == null) ? (other.image != null) : !this.image.equals(other.image)) {
             return false;
         }
-        if (!Objects.equals(this.club, other.club)) {
+        if (this.category != other.category && (this.category == null || !this.category.equals(other.category))) {
+            return false;
+        }
+        if (this.club != other.club && (this.club == null || !this.club.equals(other.club))) {
             return false;
         }
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Goods{" + "goodsId=" + goodsId + ", nameGoods=" + nameGoods + ", priceGoods=" + priceGoods + ", infomation=" + information + ", image=" + image + ", category=" + category + ", club=" + club + '}';
+    }
+
+    
     
 
 }

@@ -36,7 +36,7 @@ public class OrderedGoods implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Orders order;
 
     @Column(name = "amount")
     private int amount;
@@ -44,7 +44,7 @@ public class OrderedGoods implements Serializable {
     public OrderedGoods() {
     }
 
-    public OrderedGoods(Goods goods, Order order, int amount) {
+    public OrderedGoods(Goods goods, Orders order, int amount) {
         this.goods = goods;
         this.order = order;
         this.amount = amount;
@@ -66,7 +66,7 @@ public class OrderedGoods implements Serializable {
         this.goods = goods;
     }
 
-    public Order getOrder() {
+    public Orders getOrder() {
         return order;
     }
 
@@ -76,7 +76,7 @@ public class OrderedGoods implements Serializable {
     }
 
     
-    public void setOrder(Order order) {
+    public void setOrder(Orders order) {
         this.order = order;
     }
 

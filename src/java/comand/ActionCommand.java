@@ -3,20 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
 
-import model.entity.Orders;
+package comand;
 
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author asus
  */
+public interface ActionCommand {
+     String execute(HttpServletRequest request);
 
-public class OrderDaoImpl extends DaoImpl{
-
-    public OrderDaoImpl() {
-        super(Orders.class);
-    }
-  
 }

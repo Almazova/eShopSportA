@@ -39,12 +39,11 @@ public abstract class DaoImpl<T>
     public List<T> read() {
 
         Session session = null;
-        List<T> typeTea = new ArrayList<T>();
+        List<T> list = new ArrayList<T>();
         session = HibernateUtil.getSessionFactory();
-        typeTea = session.createCriteria(type).list();
+        list = session.createCriteria(type).list();
         session.close();
-
-        return typeTea;
+        return list;
     }
 
     @Override
@@ -77,5 +76,6 @@ public abstract class DaoImpl<T>
        
     }
      public void deleteById(long id){};
+     public List<T> readByClubCatregory(String category, String []club) {return null;};
   
 }

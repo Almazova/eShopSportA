@@ -5,24 +5,15 @@
  */
 package servlets;
 
+import comand.ActionCommand;
+import comand.ActionFactory;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dao.CategoryDaoImpl;
-import model.dao.ClubDaoImpl;
-import model.dao.DaoImpl;
-import model.entity.Category;
-import model.entity.Club;
-import model.entity.Goods;
-import model.factory.Factory;
 
 /**
  *
@@ -31,9 +22,6 @@ import model.factory.Factory;
 public class ServletPage extends HttpServlet {
 
     private ServletConfig config;
-
-    // Это наша JSP страница
-    String page = "DataPage.jsp";
 
     @Override
     public void init(ServletConfig config)
@@ -48,31 +36,26 @@ public class ServletPage extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-       // String str = (String) request.getAttribute("club");
-//       PrintWriter out = response.getWriter();    
-//        out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet NewServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet NewServlet at " + str + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-
         response.setHeader("Content-Type", "text/html; charset=UTF-8");
+        String page = null;       
 
-        Goods goods = new Goods();
-        DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
-        List<Goods> goodsList = new ArrayList<Goods>();
-        goodsList = daoImpl.read();
-        request.setAttribute("data", goodsList);
-        // Переходим на JSP страницу
-        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        if (dispatcher != null) {
+     
+        ActionFactory client = new ActionFactory();
+        ActionCommand command = client.defineCommand(request);
+
+        page = command.execute(request);
+        if (page != null) {
+            RequestDispatcher dispatcher
+                    = request.getRequestDispatcher(page);
             dispatcher.forward(request, response);
+        } else {
+          
+            // установка страницы c cообщением об ошибке
+//            page = ConfigurationManager.getProperty("path.page.index");
+//            request.getSession().setAttribute("nullPage",
+//                    MessageManager.getProperty("message.nullpage"));
+//            response.sendRedirect(request.getContextPath() + page);
         }
-
     }
 
     @Override

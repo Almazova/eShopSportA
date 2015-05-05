@@ -22,8 +22,8 @@ import javax.persistence.Table;
  * @author asus
  */
 @Entity
-@Table(name = "order")
-public class Order implements Serializable {
+@Table(name = "orders")
+public class Orders implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,10 +49,10 @@ public class Order implements Serializable {
     @JoinColumn(name = "status_id")
     private OrderStatus orderStatus;   
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(String dateOrder, Client client, DeliveryMethod deliveryMethod, PaymentMethod paymentMethod, OrderStatus orderStatus) {
+    public Orders(String dateOrder, Client client, DeliveryMethod deliveryMethod, PaymentMethod paymentMethod, OrderStatus orderStatus) {
         this.dateOrder = dateOrder;
         this.client = client;
         this.deliveryMethod = deliveryMethod;
@@ -133,7 +133,7 @@ public class Order implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Order other = (Order) obj;
+        final Orders other = (Orders) obj;
         if (!Objects.equals(this.ordersId, other.ordersId)) {
             return false;
         }

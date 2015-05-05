@@ -4,7 +4,7 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/catalogeshop</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/catalogeshop1</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">password</property>   
         <property name="connection.pool_size">1</property>
@@ -12,5 +12,11 @@
         <mapping class="model.entity.Category"/>
         <mapping class="model.entity.Club"/>
         <mapping class="model.entity.Goods"/>
-    </session-factory>
+        <mapping class="model.entity.Client"/>
+        <mapping class="model.entity.DeliveryMethod"/>
+        <mapping class="model.entity.Orders"/>
+        <mapping class="model.entity.OrderStatus"/>
+        <mapping class="model.entity.OrderedGoods"/>
+        <mapping class="model.entity.PaymentMethod"/>
+           </session-factory>
 </hibernate-configuration>
