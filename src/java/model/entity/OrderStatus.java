@@ -6,13 +6,21 @@
 package model.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  *
@@ -20,6 +28,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "order_status")
+@NamedQueries({
+    @NamedQuery(name = "SELECT_BY_STATUS",
+            query = "from model.entity.OrderStatus d where d.nameStatus = :nameStatus")
+})
 public class OrderStatus implements Serializable {
 
     @Id
@@ -53,6 +65,7 @@ public class OrderStatus implements Serializable {
         this.nameStatus = nameStatus;
     }
 
+
     @Override
     public String toString() {
         return "OrderStatus{" + "statusId=" + statusId + ", nameStatus=" + nameStatus + '}';
@@ -83,6 +96,5 @@ public class OrderStatus implements Serializable {
         }
         return true;
     }
-    
-    
+
 }

@@ -5,9 +5,9 @@
  */
 package model.factory;
 
+import model.entity.OrderedGoods;
 import model.dao.*;
 import model.entity.*;
-
 
 /**
  *
@@ -24,6 +24,7 @@ public class Factory<T> {
     private static DaoImpl orderDao = null;
     private static DaoImpl orderStatusDao = null;
     private static DaoImpl paymentMethodDao = null;
+    private static DaoImpl orderedGoodsDao = null;
 
     private static Factory instance = null;
 
@@ -69,12 +70,17 @@ public class Factory<T> {
             if (orderStatusDao == null) {
                 orderStatusDao = new OrderStatusDaoImpl();
             }
-            return categoryDao;
+            return orderStatusDao;
         } else if (t.getClass() == PaymentMethod.class) {
             if (paymentMethodDao == null) {
                 paymentMethodDao = new PaymentMethodDaoImpl();
             }
             return paymentMethodDao;
+        } else if (t.getClass() ==  OrderedGoods.class) {
+            if (orderedGoodsDao == null) {
+                orderedGoodsDao = new OrderedGoodsDaoImpl();
+            }
+            return orderedGoodsDao;
         }
 
         return null;

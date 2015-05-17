@@ -21,20 +21,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "category")
 public class Category implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "category_id")
     private Long categoryId;
-    
+
     @Column(name = "name_category")
     private String nameCategory;
+
+   
 
     public Category() {
     }
 
-    
-    public Category(String nameCategory) {       
+    public Category(String nameCategory) {
         this.nameCategory = nameCategory;
     }
 
@@ -54,9 +55,12 @@ public class Category implements Serializable {
         this.nameCategory = nameCategory;
     }
 
+ 
+
+    
     @Override
     public String toString() {
-        return "Category{" + "categoryId=" + categoryId + ", nameCategory=" + nameCategory + '}'+"\n";
+        return "Category{" + "categoryId=" + categoryId + ", nameCategory=" + nameCategory + '}' + "\n";
     }
 
     @Override
@@ -84,6 +88,5 @@ public class Category implements Serializable {
         }
         return true;
     }
-    
-    
+
 }

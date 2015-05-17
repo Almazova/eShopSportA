@@ -6,10 +6,10 @@
 package model.entity;
 
 import java.io.Serializable;
-import java.util.Objects;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,47 +32,43 @@ import javax.persistence.Table;
             query = "from model.entity.Goods g where g.club.nameClub = :nameClub1 and g.category.nameCategory = :nameCategory"),
     @NamedQuery(name = "SELECT_BY_TWO_CLUB_AND_CATEGORY",
             query = "from model.entity.Goods g where (g.club.nameClub = :nameClub1 or"
-                    + " g.club.nameClub = :nameClub2) and g.category.nameCategory = :nameCategory"),
+            + " g.club.nameClub = :nameClub2) and g.category.nameCategory = :nameCategory"),
     @NamedQuery(name = "SELECT_BY_THREE_CLUB_AND_CATEGORY",
             query = "from model.entity.Goods g where (g.club.nameClub = :nameClub1 or"
-                    + " g.club.nameClub = :nameClub2 or g.club.nameClub = :nameClub3) and"
-                    + " g.category.nameCategory = :nameCategory")
-//    
-//    @NamedQuery(name = "HQL_SELECT_BETWEEN", query = "from Tea where number between :a and :b"),
-//    @NamedQuery(name = "HQL_SELECT_AMOUNT", query = "select count(*)from Tea where name =:name"),
-//    @NamedQuery(name = "HQL_SELECT_BETWEEN_PRICE", query = "from Tea where number >:a and price <:price"),
-//    @NamedQuery(name = "HQL_SELECT_BY_TYPE", query = "select tea from Tea as tea left join tea.typeTea as "
-//            + "typeTea where typeTea.typeTeaName = :typeTea"),
-//    @NamedQuery(name = "HQL_SELECT_AMOUNT_BT_TYPE", query = "select sum(tea.number) from Tea as tea left join "
-//            + "tea.typeTea as typeTea where typeTea.typeTeaName = :typeTea"),
+            + " g.club.nameClub = :nameClub2 or g.club.nameClub = :nameClub3) and"
+            + " g.category.nameCategory = :nameCategory")
+
 })
 public class Goods implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "goods_id")
     private Long goodsId;
-    
+
     @Column(name = "name_goods")
     private String nameGoods;
-    
+
     @Column(name = "price_goods")
     private long priceGoods;
-    
+
     @Column(name = "information")
     private String information;
-    
+
     @Column(name = "image")
     private String image;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @Column(name = "deleted")
+    private boolean deleted;
+
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-     
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     @JoinColumn(name = "club_id")
     private Club club;
 
- 
     public Goods() {
     }
 
@@ -84,9 +80,6 @@ public class Goods implements Serializable {
         this.category = category;
         this.club = club;
     }
-
-  
-    
 
     public Long getGoodsId() {
         return goodsId;
@@ -112,11 +105,11 @@ public class Goods implements Serializable {
         this.priceGoods = priceGoods;
     }
 
-    public String getInfomation() {
+    public String getInformation() {
         return information;
     }
 
-    public void setInfomation(String infomation) {
+    public void setInformation(String infomation) {
         this.information = infomation;
     }
 
@@ -127,8 +120,8 @@ public class Goods implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
-    
-       public Club getClub() {
+
+    public Club getClub() {
         return club;
     }
 
@@ -143,6 +136,16 @@ public class Goods implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -194,8 +197,5 @@ public class Goods implements Serializable {
     public String toString() {
         return "Goods{" + "goodsId=" + goodsId + ", nameGoods=" + nameGoods + ", priceGoods=" + priceGoods + ", infomation=" + information + ", image=" + image + ", category=" + category + ", club=" + club + '}';
     }
-
-    
-    
 
 }

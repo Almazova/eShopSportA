@@ -33,7 +33,7 @@ public class ContinuedCatalogViewCommand implements ActionCommand{
         club = (String[]) session.getAttribute("selectedClub");       
         goodsList = daoImpl.readByClubCatregory(category, club);
         request.setAttribute("data", goodsList);        
-        page = "/WEB-INF/view/DataPage.jsp";      
+        page = "/WEB-INF/view/catalog.jsp";      
         return page;
     }
     

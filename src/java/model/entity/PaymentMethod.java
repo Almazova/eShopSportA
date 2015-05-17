@@ -6,13 +6,21 @@
 package model.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  *
@@ -20,14 +28,19 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "payment")
+@NamedQueries({
+    @NamedQuery(name = "SELECT_BY_PAYMENT",
+            query = "from model.entity.PaymentMethod d where d.namePm = :namePm")    
+})
 public class PaymentMethod implements Serializable {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "pm_id")
     private Long pmId;
 
     @Column(name = "name_pm")
     private String namePm;
+
 
     public PaymentMethod() {
     }
@@ -52,6 +65,7 @@ public class PaymentMethod implements Serializable {
         this.namePm = namePm;
     }
 
+ 
     @Override
     public String toString() {
         return "PaymentMethod{" + "pmId=" + pmId + ", namePm=" + namePm + '}';

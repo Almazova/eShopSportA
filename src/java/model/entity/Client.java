@@ -23,24 +23,25 @@ import javax.persistence.Table;
 public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "client_id")
+    @Column(name = "client_id",nullable = false)
     private Long clientId;
     
-    @Column(name = "surname_client")
+    @Column(name = "surname_client",nullable = false)
     private String surnameClient;
     
-    @Column(name = "name_client")
+    @Column(name = "name_client",nullable = false)
     private String nameClient;
     
     @Column(name = "email_client")
     private String emailClient;
     
-    @Column(name = "phone_client")
+    @Column(name = "phone_client",nullable = false)
     private String phoneClient;
     
-    @Column(name = "adress_client")
-    private String adressClient;
+    @Column(name = "address_client")
+    private String addressClient;
 
+    
     public Client() {
     }
 
@@ -49,7 +50,7 @@ public class Client implements Serializable {
         this.nameClient = nameClient;
         this.emailClient = emailClient;
         this.phoneClient = phoneClient;
-        this.adressClient = adressClient;
+        this.addressClient = adressClient;
     }
 
     
@@ -93,17 +94,18 @@ public class Client implements Serializable {
         this.phoneClient = phoneClient;
     }
 
-    public String getAdressClient() {
-        return adressClient;
+    public String getAddressClient() {
+        return addressClient;
     }
 
-    public void setAdressClient(String adressClient) {
-        this.adressClient = adressClient;
+    public void setAddressClient(String addressClient) {
+        this.addressClient = addressClient;
     }
+
 
     @Override
     public String toString() {
-        return "Client{" + "clientId=" + clientId + ", surnameClient=" + surnameClient + ", nameClient=" + nameClient + ", emailClient=" + emailClient + ", phoneClient=" + phoneClient + ", adressClient=" + adressClient + '}';
+        return "Client{" + "clientId=" + clientId + ", surnameClient=" + surnameClient + ", nameClient=" + nameClient + ", emailClient=" + emailClient + ", phoneClient=" + phoneClient + ", adressClient=" + addressClient + '}';
     }
 
     @Override
@@ -114,7 +116,7 @@ public class Client implements Serializable {
         hash = 37 * hash + Objects.hashCode(this.nameClient);
         hash = 37 * hash + Objects.hashCode(this.emailClient);
         hash = 37 * hash + Objects.hashCode(this.phoneClient);
-        hash = 37 * hash + Objects.hashCode(this.adressClient);
+        hash = 37 * hash + Objects.hashCode(this.addressClient);
         return hash;
     }
 
@@ -142,7 +144,7 @@ public class Client implements Serializable {
         if (!Objects.equals(this.phoneClient, other.phoneClient)) {
             return false;
         }
-        if (!Objects.equals(this.adressClient, other.adressClient)) {
+        if (!Objects.equals(this.addressClient, other.addressClient)) {
             return false;
         }
         return true;

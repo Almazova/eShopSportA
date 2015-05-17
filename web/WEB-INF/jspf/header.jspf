@@ -20,19 +20,24 @@
         <div id="content">
             <div id="menu"> 
                 <form action="ServletPage" method="post">
-                    <button style="background: #F63" type="submit" name="command" value="main_page" class="menu">Главная</button>
+                    <button style="background: #00868B" type="submit" name="command" value="main_page" class="menu">Главная</button>
                     <button type="submit" name="command" value="clothing" class="menu">Элементы одежды</button>
                     <button type="submit" name="command" value="souvenirs" class="menu">Сувениры</button>
                     <button type="submit" name="command" value="sound_attributes" class="menu">Звуковые атрибуты</button>
                     <button type="submit" name="command" value="books_and_media" class="menu">Книги и мультимедиа</button>
                     <button type="submit" name="command" value="flags_and_pennants" class="menu">Флаги и вымпелы</button>
                     <table id="checkClub">
+                        <tr >
+                            <td colspan="2" align="center">
+                                Выберите клуб:
+                            </td>
+                        </tr>
                         <tr><td><img src="img/chelsea.jpg" width="50"></td>
-                            <td><input type="checkbox" name="club" value="Chelsea" checked>Chelsea<Br></td></tr>
+                            <td><input type="checkbox" name="club" value="Chelsea" >Chelsea<Br></td></tr>
                         <tr><td><img  src="img/manchester.png" width="50"></td>
                             <td><input type="checkbox" name="club" value="Manchester United">Manchester United<Br></td></tr>
                         <tr><td><img src="img/arsenal.jpg" width="50"></td>
-                            <td><input type="checkbox" name="club" value="Arsenal">Arsenal<Br> </td>  </tr>          
+                            <td><input type="checkbox" name="club" value="Arsenal">Arsenal<Br> </td>  </tr>         
 
                     </table>    
                 </form>

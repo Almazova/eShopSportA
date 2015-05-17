@@ -1,0 +1,277 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13.05.2015, 17:26:32
+    Author     : asus
+*/
+
+#container {
+    width:1050px;
+    margin:100px auto;
+}
+
+ul#nav-bar {
+    background: #E5E5E5; /* old browsers */
+    background: -moz-linear-gradient(top, #E5E5E5 0%, #C4C4C4 100%); /* firefox */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E5E5E5), color-stop(100%,#C4C4C4)); /* webkit */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E5E5E5', endColorstr='#C4C4C4',GradientType=0 ); /* ie */
+    border:1px solid #757575;
+    border-bottom:3px solid #A30000;
+    -moz-border-radius:10px 10px 0 0;
+    -webkit-border-radius:10px 10px 0 0;
+    border-radius:10px 10px 0 0;
+    padding:10px 20px;
+    cursor:default;
+    margin-bottom: 0px;
+}
+
+ul#nav-bar li {
+    display:inline;
+    margin-right:-4px;
+}
+
+ul#nav-bar li a {
+    text-decoration:none;
+    font-weight:bold;
+    color:#1d1d1d;
+    font-family:"Arial";
+    border-left:1px solid #6f6f6f;
+    padding:10px 20px;
+}
+
+ul#nav-bar li:first-child a {
+    border-left:none;
+}
+
+ul#nav-bar li:nth-child(2) a {
+    border-left:none;
+}
+
+ul#nav-bar li a:hover {
+    background:rgba(0, 0, 0, 0.1);
+}
+
+ul#nav-bar li a.active {
+    padding:20px 20px 10px 20px;
+    background: #E20000;
+    background: -moz-linear-gradient(top, #E20000 0%, #A30000 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E20000), color-stop(100%,#A30000));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E20000', endColorstr='#A30000',GradientType=0 );
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-radius:5px 5px 0 0;
+    border-radius:5px 5px 0 0;
+    -moz-box-shadow:0px -1px 5px #000000;
+    -webkit-box-shadow:0px -1px 5px #000000;
+    box-shadow:0px -1px 5px #000000;
+    filter: progid:DXImageTransform.Microsoft.Shadow(strength=0, direction=0, color='#000000');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength=0, Direction=0, Color='#000000')";
+    color:#fff;
+}
+
+
+
+.box {  
+    width: 1045px; /* ширина */
+    height: 750px; /* высота */
+    background: #eee; /* цвет фона */
+    border: 3px solid transparent;     
+    border-radius:10px 10px 0 0;
+    -moz-border-radius:10px 10px 0 0;
+    -webkit-border-radius:10px 10px 0 0;
+    /* наша собственная граница */
+    -moz-border-image: -moz-linear-gradient(top, #8B0000 0%, #FF6A6A 100%);
+    -webkit-border-image: -webkit-linear-gradient(top, #8B0000 0%, #FF6A6A 100%);
+    border-image: linear-gradient(to bottom, #8B0000 0%, #FF6A6A 100%);
+    border-image-slice: 1; /* смещение фона границы */
+    position: absolute;
+    overflow: auto;
+
+}
+
+
+
+.table-orders {
+
+    font-family:Arial, Helvetica, sans-serif;      
+    color:#666;
+    font-size:12px;
+    text-shadow: 1px 1px 0px #fff;
+    background:#eaebec;
+    margin:20px;    
+    border:#ccc 1px solid;
+    border-collapse:separate;    
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+
+    -moz-box-shadow: 0 1px 2px #d1d1d1;
+    -webkit-box-shadow: 0 1px 2px #d1d1d1;
+    box-shadow: 0 1px 2px #d1d1d1;
+    overflow-style: auto;
+}
+
+.table-orders th {
+    font-weight:bold;
+    padding:21px 25px 22px 25px;
+    border-top:1px solid #fafafa;
+    border-bottom:1px solid #e0e0e0;
+
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+    background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+}
+.table-orders th:first-child{
+    text-align: left;
+    padding-left:20px;
+}
+.table-orders tr:first-child th:first-child{
+    -moz-border-radius-topleft:3px;
+    -webkit-border-top-left-radius:3px;
+    border-top-left-radius:3px;
+}
+.table-orders tr:first-child th:last-child{
+    -moz-border-radius-topright:3px;
+    -webkit-border-top-right-radius:3px;
+    border-top-right-radius:3px;
+}
+.table-orders tr{
+    text-align: center;
+    padding-left:20px;
+}
+.table-orders tr td:first-child{
+    text-align: left;
+    padding-left:20px;
+    border-left: 0;
+}
+.table-orders tr td {
+    padding:18px;
+    border-top: 1px solid #ffffff;
+    border-bottom:1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+
+    background: #fafafa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+    background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+.table-orders tr:nth-child(even) td{
+    background: #f6f6f6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+    background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+.table-orders tr:last-child td{
+    border-bottom:0;
+}
+.table-orders tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:3px;
+    -webkit-border-bottom-left-radius:3px;
+    border-bottom-left-radius:3px;
+}
+.table-orders tr:last-child td:last-child{
+    -moz-border-radius-bottomright:3px;
+    -webkit-border-bottom-right-radius:3px;
+    border-bottom-right-radius:3px;
+}
+.table-orders tr:hover td{
+    background: #f2f2f2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+    background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
+}
+
+.table-orders a:link {
+    color: #666;
+    font-weight: bold;
+    text-decoration:none;
+}
+.table-orders a:visited {
+    color: #999999;
+    font-weight:bold;
+    text-decoration:none;
+}
+.table-orders a:active,
+.table-orders a:hover {
+    color: #bd5a35;
+    text-decoration:underline;
+}
+
+/* заголовки таблицы */ 
+.table-orders thead td { 
+    cursor:pointer; 
+    cursor:hand; 
+    font-weight:bold; 
+    text-align:center; 
+    vertical-align:middle ;
+    font-size:14px;
+    overflow: visible;
+
+} 
+
+/* заголовок отсортированного столбца */ 
+.table-orders thead td.curcol { 
+    background-color:#757575 ;
+    color:#E20000; 
+}
+.button {
+
+    background-color: rgba(1, 1, 1, 0.001);
+    border: 0px solid; /* Параметры рамки */
+    width: 60px; /* Ширина кнопки */
+    height: 60px; /* Высота */
+
+
+}
+
+.button:hover {
+    border-color:rgba(1, 1, 1, 0.001);
+    border-style:solid;
+    border-width:0px;
+    background:rgba(1, 1, 1, 0.001);
+    border-radius: 30px;
+}
+.button:default {
+    outline: none;
+}
+#editorder{    
+    position: static;
+    width: 400px; /* ширина */  
+    padding-left: 30%;
+    padding-top: 5%;
+    font-family:Arial, Helvetica, sans-serif;      
+    color:#666;
+    font-size:16px;
+}
+.tablediv{
+    padding-left: 12%;
+     width: 800px; /* ширина */ 
+    padding-top: 1%;
+    font-family:Arial, Helvetica, sans-serif;      
+    color:#666;
+    font-size:16px;
+}
+
+th.headerSortUp { 
+    background-image: url(../img/asc.gif); 
+    background-color: #FFF5EE; 
+} 
+th.headerSortDown { 
+    background-image: url(../img/bg.png); 
+    background-color: #FFE4E1; 
+} 
+th.header { 
+    font-family:Arial, Helvetica, sans-serif;
+     font-size:14px;
+    background-image: url(../img/bg.gif); 
+    cursor: pointer; 
+    font-weight: bold; 
+    background-repeat: no-repeat; 
+    background-position: center left; 
+    padding-left: 20px; 
+    border-right: 1px solid #dad9c7; 
+    margin-left: -1px; 
+} 
+#nameGoods,#club, #category, #inf, #price{
+     font-family:Arial, Helvetica, sans-serif;
+     font-size:14px;
+}

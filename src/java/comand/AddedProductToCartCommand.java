@@ -22,6 +22,9 @@ public class AddedProductToCartCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        String page;
+        String club[];
+        String category;
         HttpSession session = request.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         if (cart == null) {
@@ -35,18 +38,18 @@ public class AddedProductToCartCommand implements ActionCommand {
 
         if (!productId.isEmpty()) {
             goods = (Goods) daoImpl.readById(Long.parseLong(productId));
-            cart.addItem(goods);
+            if (!goods.isDeleted()) {
+                cart.addItem(goods);
+            }
         }
-        String page;
-        String club[];
-        String category;
-        List<Goods> goodsList = new ArrayList<Goods>();
+
+        List<Goods> goodsList = new ArrayList();
         category = (String) session.getAttribute("selectedCategory");
         club = (String[]) session.getAttribute("selectedClub");
         goodsList = daoImpl.readByClubCatregory(category, club);
         request.setAttribute("data", goodsList);
         request.setAttribute("goodsAdd", productId);
-        page = "/WEB-INF/view/DataPage.jsp";
+        page = "/WEB-INF/view/catalog.jsp";
         return page;
 
     }

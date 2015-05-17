@@ -5,19 +5,31 @@
  */
 package model.dao;
 
+import java.util.List;
 import model.entity.PaymentMethod;
-
-
+import model.utils.HibernateUtil;
+import org.hibernate.Session;
 
 /**
  *
  * @author asus
  */
-
-public class PaymentMethodDaoImpl extends DaoImpl{
+public class PaymentMethodDaoImpl extends DaoImpl {
 
     public PaymentMethodDaoImpl() {
-        super( PaymentMethod.class);
+        super(PaymentMethod.class);
     }
-  
+
+    @Override
+    public PaymentMethod readByNamePayment(String payment) {
+        PaymentMethod paymentMethod = new PaymentMethod();
+        Session session = HibernateUtil.getSessionFactory();
+        session.beginTransaction();
+        paymentMethod = (PaymentMethod) session.getNamedQuery("SELECT_BY_PAYMENT")
+                .setString("namePm", payment)
+                .list()
+                .get(0);
+        return paymentMethod;
+
+    }
 }

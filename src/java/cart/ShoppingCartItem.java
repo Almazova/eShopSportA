@@ -13,8 +13,8 @@ import model.entity.Goods;
  */
 public class ShoppingCartItem {
 
-    Goods goods;
-    short quantity;
+    private Goods goods;
+    private short quantity;
 
     public ShoppingCartItem(Goods goods) {
         this.goods = goods;
@@ -41,7 +41,7 @@ public class ShoppingCartItem {
         quantity--;
     }
 
-    public double getTotal() {
+    public long getTotal() {
         long amount = 0;
         amount = (this.getQuantity() * goods.getPriceGoods());
         return amount;

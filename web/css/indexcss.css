@@ -15,7 +15,7 @@ html,body {height:100%;}
 body {background-color:#aaa;}
 
 #header {
-    background-color:#fc6;	
+    background-color:#BBFFFF;	
     color:#030;
     z-index:5;
     height:50px;
@@ -34,7 +34,7 @@ h1{
 
 }
 #footer {
-    background-color:#fc6;	
+    background-color:#BBFFFF;	
     height:50px;
     z-index:5;
     position:fixed; /* параметр, при помощи которого мы фиксируем div-блок */
@@ -46,7 +46,7 @@ h1{
 
 }
 #middle {
-    background-color:#fff;	
+    background-color:#F0FFFF;	
     overflow:hidden;
     min-height:100%;
     padding-bottom:100px; 
@@ -72,14 +72,14 @@ h1{
     width:30%;
 }
 #left {
-    background-color:#e9e9e9;
+    background-color:#FFFFFF;
 
 }
 
 
 
 .left {
-    background:#e9e9e9;
+    background:#FFFFFF;
     position:absolute;
     right:0;
     bottom:0;
@@ -101,20 +101,6 @@ font{
 
 
 
-#quote{
-    background: #FCFCFC;            // Цвет фона внутри цитаты
-    border:#060 medium;
-    padding: 15px;
-    color: #333;
-    font-style: italic;             // Задаем стиль текста, здесь курсив
-    font-size: 14px;                // Размер текста
-
-    text-align:right;
-    display:inline-block;
-
-    margin:0 10% 5% 50%;
-    width:40%;
-}
 #headimg, #catalog{
     margin:auto;
     font-family:"Times New Roman",Times,serif;
@@ -158,19 +144,19 @@ td {
     text-align: left;
     border-collapse: collapse;	
     margin:5% 5% 5% 5%;
-    border: 4px solid  #0C9;
+    border: 4px solid  #AFEEEE;
 
 }
-
 A {
-    color: #F63; /* Цвет ссылок */
+    color: #0000EE; /* Цвет ссылок */
 }
 A:visited {
-    color: #F90; /* Цвет посещенных ссылок */
+    color: #1874CD; /* Цвет посещенных ссылок */
 }
 A:active {
-    color: #F33; /* Цвет активных ссылок */
+    color: #00C5CD; /* Цвет активных ссылок */
 }
+
 p.link{
     position:absolute; 
     right:20px; 
@@ -183,22 +169,22 @@ p.link{
     font-size: 18pt;    
     margin:0 5% 0 7%;
     height:50px;
-    border-color:#c2e254 #9bb838 #9bb838 #c2e254;
+    border-color:#00868B;
     border-style:solid;
     border-width:1px;
-    background:#FFCC66;
+    background:#8EE5EE;
     cursor:pointer;
     width: 250px;
 }
 
 .menu:hover {
-    border-color:#FFCC66 #FFFF99 #FFFF99 #FFCC66;
+    border-color:#8EE5EE;
     border-style:solid;
     border-width:1px;
-    background:#FFFF99;
+    background:#00C5CD;
 }
 .menu:focus {
-    background:#ddd;
+    background:#00C5CD;
     border-color:#ddd #333 #333 #ddd;
     border-style:solid;
     border-width:1px;
@@ -214,7 +200,7 @@ p.link{
 }
 .lightBlue { background-color: #edf8f7 }
 
-.white { background-color: #fff }
+.white { background-color: #F0FFFF }
 
 .headertable {
     background-color: #c3e3e0;
@@ -235,8 +221,15 @@ p.link{
     font-size: 14pt; 
 
 }
+#nogoods{
+    height: 30px;
+    width: 200px;
+    font-family:"Times New Roman",Times,serif;
+    font-size: 14pt; 
+
+}
 #span{
-    
+
     color:#104E8B;
     font-size:25px;
 }
@@ -254,3 +247,51 @@ fieldset{
     font-size: 14pt; 
     border-color: #1874CD;
 }
+
+#wrap{
+    display: none;
+    opacity: 0.8;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 16px;
+    background-color: rgba(1, 1, 1, 0.725);
+    z-index: 100;
+    overflow: auto;
+}
+
+.window{
+    width: 600px;
+    height: 600px;
+    margin: 50px auto;
+    display: none;
+    background: #fff;
+    z-index: 200;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 10%;
+    bottom: 0;
+    padding: 16px;
+}
+
+.close{
+    margin-left: 564px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+.background{
+    background-size: contain;
+    width: 90%; 
+    height: 90%
+}
+
+.transparentChelsea {
+    background: rgba(204, 242, 255, 0.7); /* Цвет фона и значение прозрачности */
+    padding: 10px; /* Поля вокруг текста */    
+    font-family:"Times New Roman",Times,serif;
+    font-size: 15pt; 
+    
+   }

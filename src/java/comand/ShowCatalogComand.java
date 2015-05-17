@@ -5,13 +5,13 @@
  */
 package comand;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
 import model.entity.Goods;
+
 import model.factory.Factory;
 
 /**
@@ -27,7 +27,7 @@ public class ShowCatalogComand implements ActionCommand {
         String category;
         Goods goods = new Goods();
         DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
-        List<Goods> goodsList = new ArrayList<Goods>();
+        List<Goods> goodsList;
         club = request.getParameterValues("club");
         category = CollectionNames.getNameCategoryByKey(request.getParameter("command"));
         goodsList = daoImpl.readByClubCatregory(category, club);
@@ -35,7 +35,9 @@ public class ShowCatalogComand implements ActionCommand {
         HttpSession session = request.getSession();
         session.setAttribute("selectedCategory", category);
         session.setAttribute("selectedClub", club);
-        page = "/WEB-INF/view/DataPage.jsp";
+        page = "/WEB-INF/view/catalog.jsp";
+        
+        
         // определение пути к main.jsp
         //page = ConfigurationManager.getProperty("path.page.main");
 

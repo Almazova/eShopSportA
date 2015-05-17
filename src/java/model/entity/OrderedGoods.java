@@ -10,12 +10,17 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import model.entity.Goods;
+import model.entity.Orders;
 
 /**
  *
@@ -23,6 +28,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ordered_good")
+@NamedQueries({
+    @NamedQuery(name = "SELECT_BY_STATUS_NAME",
+            query = "from model.entity.OrderedGoods g where g.order.orderStatus.nameStatus = :nameStatus order by g.order"),
+    @NamedQuery(name = "DELETE_BY_ORDER",
+            query = "delete from model.entity.OrderedGoods g where g.order.ordersId = :idorder"),
+    @NamedQuery(name = "SELECT_BY_ORDER",
+            query = "from model.entity.OrderedGoods g where g.order.ordersId = :idorder")
+    
+})
 public class OrderedGoods implements Serializable {
 
     @Id
@@ -30,25 +44,29 @@ public class OrderedGoods implements Serializable {
     @Column(name = "ordered_good_id")
     private Long orderedGoodId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "goods_id")
     private Goods goods;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Orders order;
 
     @Column(name = "amount")
     private int amount;
+    
+    @Column(name = "price")
+    private long price;
 
     public OrderedGoods() {
     }
 
-    public OrderedGoods(Goods goods, Orders order, int amount) {
+    public OrderedGoods(Goods goods, Orders order, int amount, long price) {
         this.goods = goods;
         this.order = order;
         this.amount = amount;
-    }
+        this.price = price;
+    }   
 
     public Long getOrderedGoodId() {
         return orderedGoodId;
@@ -70,10 +88,14 @@ public class OrderedGoods implements Serializable {
         return order;
     }
 
-    @Override
-    public String toString() {
-        return "OrderedGoods{" + "orderedGoodId=" + orderedGoodId + ", goods=" + goods + ", order=" + order + ", amount=" + amount + '}';
+    public long getPrice() {
+        return price;
     }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }  
+    
 
     
     public void setOrder(Orders order) {
@@ -90,11 +112,12 @@ public class OrderedGoods implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 73 * hash + Objects.hashCode(this.orderedGoodId);
-        hash = 73 * hash + Objects.hashCode(this.goods);
-        hash = 73 * hash + Objects.hashCode(this.order);
-        hash = 73 * hash + this.amount;
+        int hash = 7;
+        hash = 41 * hash + (this.orderedGoodId != null ? this.orderedGoodId.hashCode() : 0);
+        hash = 41 * hash + (this.goods != null ? this.goods.hashCode() : 0);
+        hash = 41 * hash + (this.order != null ? this.order.hashCode() : 0);
+        hash = 41 * hash + this.amount;
+        hash = 41 * hash + (int) (this.price ^ (this.price >>> 32));
         return hash;
     }
 
@@ -107,20 +130,29 @@ public class OrderedGoods implements Serializable {
             return false;
         }
         final OrderedGoods other = (OrderedGoods) obj;
-        if (!Objects.equals(this.orderedGoodId, other.orderedGoodId)) {
+        if (this.orderedGoodId != other.orderedGoodId && (this.orderedGoodId == null || !this.orderedGoodId.equals(other.orderedGoodId))) {
             return false;
         }
-        if (!Objects.equals(this.goods, other.goods)) {
+        if (this.goods != other.goods && (this.goods == null || !this.goods.equals(other.goods))) {
             return false;
         }
-        if (!Objects.equals(this.order, other.order)) {
+        if (this.order != other.order && (this.order == null || !this.order.equals(other.order))) {
             return false;
         }
         if (this.amount != other.amount) {
             return false;
         }
+        if (this.price != other.price) {
+            return false;
+        }
         return true;
     }
+
     
+    @Override
+    public String toString() {
+        return "OrderedGoods{" + "orderedGoodId=" + orderedGoodId + ", goods=" + goods + ", order=" + order + ", amount=" + amount + ", price=" + price + '}';
+    }
+
     
 }

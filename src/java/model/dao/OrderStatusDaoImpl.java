@@ -6,6 +6,8 @@
 package model.dao;
 
 import model.entity.OrderStatus;
+import model.utils.HibernateUtil;
+import org.hibernate.Session;
 
 
 
@@ -21,4 +23,15 @@ public class OrderStatusDaoImpl extends DaoImpl{
         super(OrderStatus.class);
     }
   
+    @Override
+    public OrderStatus readByNameStatus(String status) {
+        OrderStatus orderStatus = new OrderStatus();
+        Session session = HibernateUtil.getSessionFactory();        
+        orderStatus = (OrderStatus) session.getNamedQuery("SELECT_BY_STATUS")
+                .setString("nameStatus", status)
+                .list()
+                .get(0);
+        return orderStatus;
+
+    }
 }

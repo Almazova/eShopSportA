@@ -7,6 +7,8 @@ package model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.criteria.Order;
+import model.entity.Orders;
 import model.utils.HibernateUtil;
 import org.hibernate.Session;
 
@@ -77,5 +79,11 @@ public abstract class DaoImpl<T>
     }
      public void deleteById(long id){};
      public List<T> readByClubCatregory(String category, String []club) {return null;};
+     public T readByNameDelivery(String delivary) {return null;};
+     public T readByNamePayment(String payment) {return null;};
+     public T readByNameStatus(String status) {return null;};
+     public List<T> readOrderedGoodsByStatus(String category){return null;};
+     public void deleteOrderedGoodsByOrder(Orders order){};
+     public List<T> readOrderedGoodsByOrder(long idOrder){return null;};
   
 }

@@ -25,8 +25,9 @@
     <jsp-config>
         <jsp-property-group>
             <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/readyOrder.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/catalog.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/cart.jsp</url-pattern>
-            <url-pattern>/WEB-INF/view/DataPage.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/checkout.jsp</url-pattern>
             <page-encoding>UTF-8</page-encoding>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>

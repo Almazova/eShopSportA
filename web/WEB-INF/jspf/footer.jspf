@@ -2,7 +2,9 @@
 <%@ page pageEncoding="UTF-8" %>
 <div class="left"></div>
 </div>
-<div id="footer"><p>Сайт спортивной атрибутики</p></div>
+<div id="footer"><p>Сайт спортивной атрибутики</p>
+    <a href="ServletPage?command=go_to_admin_main_page">Admin</a>
+</div>
 
 </div>
 </body>

@@ -17,7 +17,7 @@ public class ShoppingCart {
 
     List<ShoppingCartItem> items;
     int numberOfItems;
-    double total;
+    long total;
 
     public ShoppingCart() {
         items = new ArrayList<ShoppingCartItem>();
@@ -158,15 +158,12 @@ public class ShoppingCart {
      * @param surcharge the designated surcharge for all orders
      * @see ShoppingCartItem
      */
-    public synchronized void calculateTotal(String surcharge) {
+    public synchronized void calculateTotal(long surcharge) {
 
-        double amount = 0;
-
-        // cast surcharge as double
-        double s = Double.parseDouble(surcharge);
+        long amount = 0;
 
         amount = this.getSubtotal();
-        amount += s;
+        amount += surcharge;
 
         total = amount;
     }

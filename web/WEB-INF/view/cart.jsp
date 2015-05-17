@@ -10,22 +10,21 @@
         <%-- clear cart widget --%>
         <c:if test="${!empty cart && cart.numberOfItems != 0}">
             <a href="ServletPage?command=clear_cart" class="bubble hMargin">Отчистить корзину</a> &ensp;&ensp;
-        </c:if>
-   
+        </c:if>   
 
-        <a href="ServletPage?command=continue_view" class="bubble hMargin" style="color: #F33">
+        <a href="ServletPage?command=continue_view" class="bubble hMargin" style="color: #00868B">
             Продолжить просмотр каталога</a>&ensp;&ensp;
 
         <%-- checkout widget --%>
         <c:if test="${!empty cart && cart.numberOfItems != 0}">
-            
+
             <a href="ServletPage?command=go_to_checkout" class="bubble hMargin">Перейти к оформлению заказа &#x279f;</a>
         </c:if>
     </div>
 
     <c:if test="${!empty cart && cart.numberOfItems != 0}">
 
-        <h4 id="subtotal">Итого: ${cart.subtotal} руб.</h4>
+        <h4 id="subtotal">Итого: ${cart.subtotal} бел. руб.</h4>
 
         <table id="cartTable">
 
@@ -34,6 +33,7 @@
                 <th>Название</th>
                 <th>Цена, бел. руб.</th>
                 <th>Количество</th>
+                <th>Удалить</th>
             </tr>
 
             <c:forEach var="cartItem" items="${cart.items}" varStatus="iter">
@@ -54,31 +54,45 @@
                         <span class="smallText">( ${goods.priceGoods} / шт. )</span>
                     </td>                   
                     <td>
-                        <form action="ServletPage" method="post">
+                        <form action="ServletPage" method="post" style="padding-left: 20%">
                             <input type="hidden"
                                    name="goodsId"
                                    value="${goods.goodsId}">
                             <input type="text"
-                                   maxlength="2"
+                                   maxlength="3"
                                    size="2"
                                    value="${cartItem.quantity}"
                                    name="quantity"
                                    style="margin:5px" 
-                                   pattern="[0-9]"
+                                   pattern="[0-9]{1,3}"
                                    title="Только числа"
                                    >
                             <button type="submit"
                                     name="command" 
-                                    value="update_quantity"> Изменить </button>   
+                                    value="update_quantity"> Изменить
+                                <img src="${pageContext.request.contextPath}/img/icon/update.png" width="30px">
+                            </button>   
 
                         </form>
                     </td>
-
+                    <td>
+                        <form action="ServletPage" method="post" style="padding-left: 40%">
+                            <input type="hidden"
+                                   name="goodsId"
+                                   value="${goods.goodsId}">
+                            <button type="submit"
+                                    name="command"                                     
+                                    value="delete_goods_from_cart" > 
+                                <img src="${pageContext.request.contextPath}/img/icon/delete.png" width="30px">
+                            </button>                             
+                        </form>
+                    </td>
                 </tr>
 
             </c:forEach>
-
         </table>
-
+    </c:if>
+    <c:if test="${empty cart || cart.numberOfItems == 0}">
+        <h2 style="padding-left: 35%">Корзина пуста...</h2>
     </c:if>
 </div>

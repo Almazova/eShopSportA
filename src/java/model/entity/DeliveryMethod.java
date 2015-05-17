@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +22,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "delivery")
+@NamedQueries({
+    @NamedQuery(name = "SELECT_BY_DELIVERY",
+            query = "from model.entity.DeliveryMethod d where d.nameDm = :nameDm")
+})
 public class DeliveryMethod implements Serializable {
 
     @Id
@@ -29,9 +35,11 @@ public class DeliveryMethod implements Serializable {
 
     @Column(name = "name_dm")
     private String nameDm;
-    
+
     @Column(name = "price_dm")
     private long priceDm;
+
+
 
     public DeliveryMethod() {
     }
@@ -64,6 +72,8 @@ public class DeliveryMethod implements Serializable {
     public void setPriceDm(long priceDm) {
         this.priceDm = priceDm;
     }
+
+
 
     @Override
     public String toString() {
@@ -99,6 +109,5 @@ public class DeliveryMethod implements Serializable {
         }
         return true;
     }
-    
-    
+
 }
