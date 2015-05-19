@@ -5,12 +5,12 @@
  */
 package model.dao;
 
-
 import java.util.List;
 import model.entity.OrderedGoods;
 import model.entity.Orders;
 
 import model.utils.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -25,30 +25,42 @@ public class OrderedGoodsDaoImpl extends DaoImpl {
 
     @Override
     public List<OrderedGoods> readOrderedGoodsByStatus(String nameStatus) {
-        List<OrderedGoods> orderedGoods;
-        Session session = HibernateUtil.getSessionFactory();
-        orderedGoods = (List<OrderedGoods>) session.getNamedQuery("SELECT_BY_STATUS_NAME")
-                .setString("nameStatus", nameStatus)
-                .list();
-        return orderedGoods;
+        try {
+            List<OrderedGoods> orderedGoods;
+            Session session = HibernateUtil.getSessionFactory();
+            orderedGoods = (List<OrderedGoods>) session.getNamedQuery("SELECT_BY_STATUS_NAME")
+                    .setString("nameStatus", nameStatus)
+                    .list();
+            return orderedGoods;
+        } catch (HibernateException e) {
+            throw new HibernateException("HibernateException in readOrderedGoodsByStatus(String nameStatus)");
+        }
     }
 
     @Override
     public void deleteOrderedGoodsByOrder(Orders order) {
-        Session session = HibernateUtil.getSessionFactory();
-        session.beginTransaction();        
-        session.getNamedQuery("DELETE_BY_ORDER").setLong("idorder", order.getOrdersId()).executeUpdate(); 
-        session.getTransaction().commit();
-        session.close();
+        try {
+            Session session = HibernateUtil.getSessionFactory();
+            session.beginTransaction();
+            session.getNamedQuery("DELETE_BY_ORDER").setLong("idorder", order.getOrdersId()).executeUpdate();
+            session.getTransaction().commit();
+            session.close();
+        } catch (HibernateException e) {
+            throw new HibernateException("HibernateException in deleteOrderedGoodsByOrder(Orders order)");
+        }
     }
-    
+
     @Override
-    public List<OrderedGoods> readOrderedGoodsByOrder(long idOrder){
-        List<OrderedGoods> orderedGoods;
-        Session session = HibernateUtil.getSessionFactory();
-        orderedGoods = (List<OrderedGoods>) session.getNamedQuery("SELECT_BY_ORDER")
-                .setLong("idorder", idOrder)
-                .list();
-        return orderedGoods;
+    public List<OrderedGoods> readOrderedGoodsByOrder(long idOrder) {
+        try {
+            List<OrderedGoods> orderedGoods;
+            Session session = HibernateUtil.getSessionFactory();
+            orderedGoods = (List<OrderedGoods>) session.getNamedQuery("SELECT_BY_ORDER")
+                    .setLong("idorder", idOrder)
+                    .list();
+            return orderedGoods;
+        } catch (HibernateException e) {
+            throw new HibernateException("HibernateException in readOrderedGoodsByOrder(long idOrder)");
+        }
     }
 }

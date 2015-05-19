@@ -10,7 +10,7 @@ and open the template in the editor.
 
 #container {
     width:1050px;
-    margin:100px auto;
+    margin:0px auto;
 }
 
 ul#nav-bar {
@@ -256,13 +256,12 @@ th.headerSortUp {
     background-color: #FFF5EE; 
 } 
 th.headerSortDown { 
-    background-image: url(../img/bg.png); 
+    background-image: url(../img/desc.gif);  
     background-color: #FFE4E1; 
 } 
 th.header { 
     font-family:Arial, Helvetica, sans-serif;
-     font-size:14px;
-    background-image: url(../img/bg.gif); 
+     font-size:14px;  
     cursor: pointer; 
     font-weight: bold; 
     background-repeat: no-repeat; 
@@ -271,7 +270,26 @@ th.header {
     border-right: 1px solid #dad9c7; 
     margin-left: -1px; 
 } 
-#nameGoods,#club, #category, #inf, #price{
+#club, #category, #price{
      font-family:Arial, Helvetica, sans-serif;
      font-size:14px;
+     width: 200px;           
+}
+#nameGoods, #inf{
+     font-family:Arial, Helvetica, sans-serif;
+     font-size:14px;
+     width: 200px;
+     resize: none; 
+     height: 50px
+}
+#gotosite{
+     background: -moz-linear-gradient(#FF6A6A, #FFF5EE, #FFF5EE);
+   background: -webkit-gradient(linear, 0 0, 0  100%, from(#FF6A6A), to(#FFF5EE), color-stop(0.5, #FFF5EE));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+   padding: 3px 7px;
+   color: #333;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+   border: 1px solid #666;
 }

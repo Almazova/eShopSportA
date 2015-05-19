@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +22,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "category")
+@NamedQueries({
+    @NamedQuery(name = "SELECT_BY_CATEGORY_NAME",
+            query = "from model.entity.Category c where c.nameCategory = :categoryName")
+})
 public class Category implements Serializable {
 
     @Id
@@ -54,8 +60,6 @@ public class Category implements Serializable {
     public void setNameCategory(String nameCategory) {
         this.nameCategory = nameCategory;
     }
-
- 
 
     
     @Override

@@ -37,7 +37,7 @@
                         <tr><td><img  src="img/manchester.png" width="50"></td>
                             <td><input type="checkbox" name="club" value="Manchester United">Manchester United<Br></td></tr>
                         <tr><td><img src="img/arsenal.jpg" width="50"></td>
-                            <td><input type="checkbox" name="club" value="Arsenal">Arsenal<Br> </td>  </tr>         
+                            <td><input type="checkbox" name="club" value="Arsenal">Arsenal<Br> </td>  </tr>        
 
                     </table>    
                 </form>

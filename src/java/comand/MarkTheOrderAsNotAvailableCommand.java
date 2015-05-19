@@ -7,25 +7,41 @@
 package comand;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
 import model.entity.Goods;
-import model.entity.Orders;
 import model.factory.Factory;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 
 /**
  *
  * @author asus
  */
 public class MarkTheOrderAsNotAvailableCommand implements ActionCommand{
+    
+    private static final Logger log = Logger.getLogger(MarkTheOrderAsNotAvailableCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
+        try{
         Goods goods = new Goods();
         String orderId = request.getParameter("goodsId");
         DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
         goods = (Goods) daoImpl.readById(Long.parseLong(orderId));
         goods.setDeleted(true);
         daoImpl.update(goods);
+        HttpSession session = request.getSession();
+        session.setAttribute("location", "admin");
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (IndexOutOfBoundsException ex) {
+            log.error("Exception: " + ex.toString() + ":don't fill in the required fields ");
+        } catch (HibernateException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (NumberFormatException ex) {
+            log.error("Exception: " + ex.toString());
+        }
         return "ServletPage?command=go_to_admin_delete_edit_goods";
     }
     

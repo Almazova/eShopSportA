@@ -7,6 +7,8 @@
 package comand;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -14,8 +16,16 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ShowCartCommand implements ActionCommand{
 
+    private static final Logger log = Logger.getLogger(ShowCartCommand.class);
+    
     @Override
     public String execute(HttpServletRequest request) {
+        try{
+        HttpSession session = request.getSession();
+        session.setAttribute("location", "website");
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        }
         return "/WEB-INF/view/cart.jsp";
     }
     

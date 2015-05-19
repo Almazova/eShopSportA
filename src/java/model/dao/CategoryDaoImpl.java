@@ -6,6 +6,9 @@
 package model.dao;
 
 import model.entity.Category;
+import model.utils.HibernateUtil;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 
 
@@ -18,5 +21,19 @@ public class CategoryDaoImpl extends DaoImpl{
     public CategoryDaoImpl() {
         super(Category.class);
     }
-    //здесь возможно будут свои методы работы с бд
+    @Override
+    public Category readByNameCategory(String categoryName) {
+        try{
+         Category category;
+        Session session = HibernateUtil.getSessionFactory();
+        session.beginTransaction();
+        category = (Category) session.getNamedQuery("SELECT_BY_CATEGORY_NAME")
+                .setString("categoryName", categoryName)                
+                .list()
+                .get(0);
+        return category;
+        } catch (HibernateException e) {
+            throw new HibernateException("HibernateException in readByNameCategory(String categoryName)");
+        }
+    }
 }

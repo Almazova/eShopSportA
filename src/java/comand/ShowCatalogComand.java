@@ -5,14 +5,15 @@
  */
 package comand;
 
+import helperclasses.CollectionNames;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
 import model.entity.Goods;
-
 import model.factory.Factory;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -20,28 +21,35 @@ import model.factory.Factory;
  */
 public class ShowCatalogComand implements ActionCommand {
 
+     private static final Logger log = Logger.getLogger(ShowCatalogComand.class);
+     
+     
     @Override
     public String execute(HttpServletRequest request) {
-        String page;
+      
         String club[];
         String category;
-        Goods goods = new Goods();
-        DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
         List<Goods> goodsList;
+        try{
+        Goods goods = new Goods();
+        DaoImpl daoImpl = Factory.getInstance().getDAO(goods);        
         club = request.getParameterValues("club");
         category = CollectionNames.getNameCategoryByKey(request.getParameter("command"));
         goodsList = daoImpl.readByClubCatregory(category, club);
         request.setAttribute("data", goodsList);
         HttpSession session = request.getSession();
         session.setAttribute("selectedCategory", category);
-        session.setAttribute("selectedClub", club);
-        page = "/WEB-INF/view/catalog.jsp";
-        
-        
-        // определение пути к main.jsp
-        //page = ConfigurationManager.getProperty("path.page.main");
+        session.setAttribute("selectedClub", club);        
+        session.setAttribute("location", "website"); 
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (IndexOutOfBoundsException ex) {
+            log.error("Exception: " + ex.toString() + ":don't fill in the required fields ");
+        } catch (HibernateException ex) {
+            log.error("Exception: " + ex.toString());
+        }
 
-        return page;
+        return "/WEB-INF/view/catalog.jsp";
     }
 
 }

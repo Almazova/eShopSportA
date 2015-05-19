@@ -8,6 +8,7 @@ package model.dao;
 import java.util.List;
 import model.entity.PaymentMethod;
 import model.utils.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -22,7 +23,8 @@ public class PaymentMethodDaoImpl extends DaoImpl {
 
     @Override
     public PaymentMethod readByNamePayment(String payment) {
-        PaymentMethod paymentMethod = new PaymentMethod();
+        try{
+        PaymentMethod paymentMethod;
         Session session = HibernateUtil.getSessionFactory();
         session.beginTransaction();
         paymentMethod = (PaymentMethod) session.getNamedQuery("SELECT_BY_PAYMENT")
@@ -30,6 +32,9 @@ public class PaymentMethodDaoImpl extends DaoImpl {
                 .list()
                 .get(0);
         return paymentMethod;
+        } catch (HibernateException e) {
+            throw new HibernateException("HibernateException in readByNamePayment(String payment)");
+        }
 
     }
 }

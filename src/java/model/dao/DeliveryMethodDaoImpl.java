@@ -5,11 +5,9 @@
  */
 package model.dao;
 
-import java.util.ArrayList;
-import java.util.List;
 import model.entity.DeliveryMethod;
-import model.entity.Goods;
 import model.utils.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -24,7 +22,8 @@ public class DeliveryMethodDaoImpl extends DaoImpl {
 
     @Override
     public DeliveryMethod readByNameDelivery(String delivary) {
-        DeliveryMethod deliveryMethod = new DeliveryMethod();
+        try{
+        DeliveryMethod deliveryMethod;
         Session session = HibernateUtil.getSessionFactory();
         session.beginTransaction();
         deliveryMethod = (DeliveryMethod) session.getNamedQuery("SELECT_BY_DELIVERY")
@@ -32,6 +31,9 @@ public class DeliveryMethodDaoImpl extends DaoImpl {
                 .list()
                 .get(0);
         return deliveryMethod;
+        } catch (HibernateException e) {
+            throw new HibernateException("HibernateException in readByNameDelivery(String delivary)");
+        }
     }
 
 }

@@ -46,16 +46,16 @@ public class Goods implements Serializable {
     @Column(name = "goods_id")
     private Long goodsId;
 
-    @Column(name = "name_goods")
+    @Column(name = "name_goods",nullable = false)
     private String nameGoods;
 
-    @Column(name = "price_goods")
+    @Column(name = "price_goods",nullable = false)
     private long priceGoods;
 
-    @Column(name = "information")
+    @Column(name = "information",nullable = false)
     private String information;
 
-    @Column(name = "image")
+    @Column(name = "image",nullable = false)
     private String image;
     
     @Column(name = "deleted")
@@ -66,7 +66,7 @@ public class Goods implements Serializable {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "club_id")
+    @JoinColumn(name = "club_id",nullable = false)
     private Club club;
 
     public Goods() {

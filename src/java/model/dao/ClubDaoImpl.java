@@ -5,7 +5,11 @@
  */
 package model.dao;
 
+import model.entity.Category;
 import model.entity.Club;
+import model.utils.HibernateUtil;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 
 
@@ -18,5 +22,20 @@ public class ClubDaoImpl extends DaoImpl{
     public ClubDaoImpl() {
         super(Club.class);
     }
-    //здесь возможно будут свои методы работы с бд
+    
+    @Override
+    public Club readByNameClub(String nameClub) {
+        try{
+        Club club;
+        Session session = HibernateUtil.getSessionFactory();
+        session.beginTransaction();
+        club = (Club) session.getNamedQuery("SELECT_BY_CLUB_NAME")
+                .setString("nameClub", nameClub)                
+                .list()
+                .get(0);
+        return club;
+        } catch (HibernateException e) {
+            throw new HibernateException("HibernateException in readByNameClub(String nameClub)");
+        }
+    }
 }

@@ -11,6 +11,11 @@ package comand;
  */
 public enum CommandEnum {
 
+    GO_TO_WEBSITE_MAIN_PAGE{
+                {
+                    this.command = new GoToWebsiteMainPageCommand();
+                }
+            },
     CLOTHING {
                 {
                     this.command = new ShowCatalogComand();
@@ -154,6 +159,31 @@ public enum CommandEnum {
     SAVE_CHANGES_TO_THE_GOODS{
                 {
                     this.command = new SaveChangesToTheGoodsCommand();
+                }
+    },
+    GO_TO_ADMIN_ADD_GOODS{
+                {
+                    this.command = new GoToAdminAddGoodsCommand();
+                }
+    },
+    ADD_GOODS_BY_ADMIN{
+                {
+                    this.command = new AddGoodsByAdminCommand();
+                }
+    },
+    OPEN_IMG{
+                {
+                    this.command = new OpenImgCommand();
+                }
+    },
+    PASSWORDCHECK{
+                {
+                    this.command = new PasswordCheckCommand();
+                }
+    },
+    EXIT{
+                {
+                    this.command = new LogoutAdminCommand();
                 }
     };
     ActionCommand command;

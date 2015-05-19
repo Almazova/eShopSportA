@@ -2,8 +2,13 @@
 <%@ page pageEncoding="UTF-8" %>
 <div class="left"></div>
 </div>
-<div id="footer"><p>Сайт спортивной атрибутики</p>
-    <a href="ServletPage?command=go_to_admin_main_page">Admin</a>
+<div id="footer"><p> Copyright © Омелящик Екатерина 2015 </p>
+    <div style="margin-left: 95%;margin-top: -50px">
+        <a href="ServletPage?command=go_to_admin_main_page" >
+            <img src="${pageContext.request.contextPath}/img/icon/admin.png" width="50px">
+            Admin
+        </a>
+    </div>
 </div>
 
 </div>

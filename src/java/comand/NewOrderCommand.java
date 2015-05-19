@@ -23,6 +23,8 @@ import model.entity.OrderedGoods;
 import model.entity.Orders;
 import model.entity.PaymentMethod;
 import model.factory.Factory;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -30,9 +32,12 @@ import model.factory.Factory;
  */
 public class NewOrderCommand implements ActionCommand {
 
+    private static final Logger log = Logger.getLogger(NewOrderCommand.class);
+    
     @Override
     public String execute(HttpServletRequest request) {
    
+        List<OrderedGoods>  orderedGoodsList = new ArrayList();
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
@@ -41,6 +46,7 @@ public class NewOrderCommand implements ActionCommand {
         String delivery = request.getParameter("delivery");
         String payment = request.getParameter("payment");
 
+        try{
         Client client = new Client(surname,name,  email, phone, address);
         DaoImpl daoImpl = Factory.getInstance().getDAO(client);
         daoImpl.create(client);
@@ -65,12 +71,11 @@ public class NewOrderCommand implements ActionCommand {
         Orders order = new Orders(df.format(date), client, deliveryMethod, paymentMethod, orderStatus);
         daoImpl = Factory.getInstance().getDAO(order);
         daoImpl.create(order);
-//
+        
         HttpSession session = request.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         cart.calculateTotal(deliveryMethod.getPriceDm());
-        List<ShoppingCartItem> shoppingCartItem = cart.getItems();
-        List<OrderedGoods> orderedGoodsList = new ArrayList();
+        List<ShoppingCartItem> shoppingCartItem = cart.getItems();       
         for (ShoppingCartItem shoppingCartItem1 : shoppingCartItem) {
             OrderedGoods orderedGoods = new OrderedGoods(shoppingCartItem1.getGoods(), 
                     order, shoppingCartItem1.getQuantity(),shoppingCartItem1.getGoods().getPriceGoods());
@@ -79,8 +84,18 @@ public class NewOrderCommand implements ActionCommand {
             orderedGoodsList.add(orderedGoods);
         }
         session.setAttribute("orderedGoods", orderedGoodsList);
-        session.setAttribute("total", cart.getTotal());
+        session.setAttribute("total", cart.getTotal());        
+        session.setAttribute("location", "website");
         cart.clear();
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (IndexOutOfBoundsException ex) {
+            log.error("Exception: " + ex.toString() + ":don't fill in the required fields ");
+        } catch (HibernateException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (NumberFormatException ex) {
+            log.error("Exception: " + ex.toString());
+        }
         if(orderedGoodsList.isEmpty())
             return "/index.jsp";
         return "/WEB-INF/view/readyOrder.jsp";

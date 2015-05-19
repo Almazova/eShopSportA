@@ -131,9 +131,11 @@ function ValidFormGoods() {
     var name = document.getElementById('nameGoods');
     var price = document.getElementById('price'); 
     var inf = document.getElementById('inf'); 
+    var category = document.getElementById('category'); 
     name.style.border = '1px solid black';
     price.style.border = '1px solid black';
-    inf.style.border = '1px solid black';   
+    inf.style.border = '1px solid black'; 
+    category.style.border = '1px solid black'; 
     if (!name.value.replace(/^\s+|\s+$/g, '')) {
         flag = false;
         name.style.border = '1px solid red';
@@ -149,9 +151,13 @@ function ValidFormGoods() {
         flag = false;
         inf.style.border = '1px solid red';
     }      
+    if (category.value === "emptyClub") {
+        flag = false;
+        category.style.border = '1px solid red';
+    }      
     output = '';
     if (!flag)
-        output = '<br />Заполните обязательные поля!';
+        output = 'Заполните обязательные поля!';
     document.getElementById('message').innerHTML = output;
     return flag;
 }

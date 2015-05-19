@@ -5,7 +5,6 @@
  */
 package comand;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +12,8 @@ import model.dao.DaoImpl;
 import model.entity.OrderedGoods;
 import model.entity.Orders;
 import model.factory.Factory;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -20,25 +21,37 @@ import model.factory.Factory;
  */
 public class DeleteGoodsFromOrderByAdminCommand implements ActionCommand {
 
+    private static final Logger log = Logger.getLogger(DeleteGoodsFromOrderByAdminCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        OrderedGoods orderedGoods = new OrderedGoods();
-        List<OrderedGoods> orderedGoodsList = new ArrayList();
-        Orders order = new Orders();
-        String orderedGoodId = request.getParameter("goodsId");
-        DaoImpl daoImpl = Factory.getInstance().getDAO(orderedGoods);
-        orderedGoods = (OrderedGoods) daoImpl.readById(Long.parseLong(orderedGoodId));
-        daoImpl.delete(orderedGoods);
-        orderedGoodsList = daoImpl.readOrderedGoodsByOrder(orderedGoods.getOrder().getOrdersId());
+        String orderId = "";
+        List<OrderedGoods> orderedGoodsList;
+        try {
+            OrderedGoods orderedGoods = new OrderedGoods();            
+            Orders order = new Orders();
+            String orderedGoodId = request.getParameter("goodsId");
+            DaoImpl daoImpl = Factory.getInstance().getDAO(orderedGoods);
+            orderedGoods = (OrderedGoods) daoImpl.readById(Long.parseLong(orderedGoodId));
+            daoImpl.delete(orderedGoods);
+            orderedGoodsList = daoImpl.readOrderedGoodsByOrder(orderedGoods.getOrder().getOrdersId());
 
-        if (orderedGoodsList.isEmpty()) {
-            daoImpl = Factory.getInstance().getDAO(order);
-            daoImpl.delete(orderedGoods.getOrder());
+            if (orderedGoodsList.isEmpty()) {
+                daoImpl = Factory.getInstance().getDAO(order);
+                daoImpl.delete(orderedGoods.getOrder());
+            }
+
+            HttpSession session = request.getSession();
+            request.setAttribute("orderId", session.getAttribute("orderId"));
+            orderId = (String) session.getAttribute("orderId");
+            session.setAttribute("location", "website");
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (HibernateException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (NumberFormatException ex) {
+            log.error("Exception: " + ex.toString());
         }
-
-        HttpSession session = request.getSession();
-        request.setAttribute("orderId", session.getAttribute("orderId"));
-        String orderId = (String) session.getAttribute("orderId");
         return "ServletPage?command=edit_order_by_admin&orderId=" + orderId;
     }
 

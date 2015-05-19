@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.entity.Goods;
 import model.utils.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -28,7 +29,8 @@ public class GoodsDaoImpl extends DaoImpl {
 
     @Override
     public List<Goods> readByClubCatregory(String category, String[] club) {
-        List<Goods> goods = new ArrayList<Goods>();
+        try{
+        List<Goods> goods;
         Session session = HibernateUtil.getSessionFactory();
         session.beginTransaction();
         if (club == null) {
@@ -58,6 +60,9 @@ public class GoodsDaoImpl extends DaoImpl {
         }
         session.close();
         return goods;
+        } catch (HibernateException e) {
+            throw new HibernateException("HibernateException in readByClubCatregory(String category, String[] club)");
+        }
     }
 
 }

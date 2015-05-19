@@ -5,15 +5,15 @@
  */
 package comand;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
-
 import model.entity.OrderedGoods;
 import model.entity.Orders;
 import model.factory.Factory;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -21,11 +21,14 @@ import model.factory.Factory;
  */
 public class EditOrderByAdminCommand implements ActionCommand {
 
+    private static final Logger log = Logger.getLogger(EditOrderByAdminCommand.class);
+    
     @Override
     public String execute(HttpServletRequest request) {
+        try{
         Orders order = new Orders();
         OrderedGoods orderedGoods = new OrderedGoods();
-        List<OrderedGoods> orderedGoodsList = new ArrayList();
+        List<OrderedGoods> orderedGoodsList;
         String orderId = request.getParameter("orderId");
         DaoImpl daoImpl = Factory.getInstance().getDAO(order);
         order = (Orders) daoImpl.readById(Long.parseLong(orderId));
@@ -34,7 +37,15 @@ public class EditOrderByAdminCommand implements ActionCommand {
         HttpSession session = request.getSession();
         session.setAttribute("orderedGoods", orderedGoodsList);
         session.setAttribute("order", order);
-        session.setAttribute("orderId", orderId);
+        session.setAttribute("orderId", orderId);        
+        session.setAttribute("location", "admin");
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        }  catch (HibernateException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (NumberFormatException ex) {
+            log.error("Exception: " + ex.toString());
+        }
         return "/WEB-INF/view/adminEditOrder.jsp";
     }
 

@@ -8,6 +8,7 @@ package comand;
 import cart.ShoppingCart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -15,12 +16,19 @@ import javax.servlet.http.HttpSession;
  */
 public class CleaningCartCommand implements ActionCommand {
 
+    private static final Logger log = Logger.getLogger(CleaningCartCommand.class);
+
     @Override
     public String execute(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        cart.clear();
+        try {
+            HttpSession session = request.getSession();
+            ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+            cart.clear();
+            session.setAttribute("location", "website");
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        }
         return "/WEB-INF/view/cart.jsp";
-    }
 
+    }
 }

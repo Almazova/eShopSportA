@@ -6,6 +6,7 @@
 package comand;
 
 import javax.servlet.http.HttpServletRequest;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionFactory {
 
+     private static final Logger log = Logger.getLogger(ActionFactory.class);
+     
     public ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand current = new EmptyCommand();
         
@@ -25,9 +28,7 @@ public class ActionFactory {
             CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException e) {
-//            request.setAttribute("wrongAction", action
-//                    + MessageManager.getProperty("message.wrongaction") 
-
+            log.error("Exception: " + e.toString());
         }
         return current;
     }

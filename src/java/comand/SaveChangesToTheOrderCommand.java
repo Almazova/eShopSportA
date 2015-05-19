@@ -6,12 +6,15 @@
 package comand;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
 import model.entity.Client;
 import model.entity.DeliveryMethod;
 import model.entity.Orders;
 import model.entity.PaymentMethod;
 import model.factory.Factory;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -19,9 +22,11 @@ import model.factory.Factory;
  */
 public class SaveChangesToTheOrderCommand implements ActionCommand {
 
+    private static final Logger log = Logger.getLogger(SaveChangesToTheOrderCommand.class);
+    
     @Override
     public String execute(HttpServletRequest request) {
-   
+        try{
         String idClient = request.getParameter("clientId");
         String idOrder = request.getParameter("ordersId");
         String name = request.getParameter("name");
@@ -48,8 +53,7 @@ public class SaveChangesToTheOrderCommand implements ActionCommand {
 
         PaymentMethod paymentMethod = new PaymentMethod();
         daoImpl = Factory.getInstance().getDAO(paymentMethod);
-        paymentMethod = (PaymentMethod) daoImpl.readByNamePayment(payment);
-       
+        paymentMethod = (PaymentMethod) daoImpl.readByNamePayment(payment);       
 
         Orders order = new Orders();
         daoImpl = Factory.getInstance().getDAO(order);
@@ -59,6 +63,15 @@ public class SaveChangesToTheOrderCommand implements ActionCommand {
         order.setPaymentMethod(paymentMethod);
         daoImpl.update(order);
         
+        HttpSession session = request.getSession();        
+        session.setAttribute("location", "admin");
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (IndexOutOfBoundsException ex) {
+            log.error("Exception: " + ex.toString() + ":don't fill in the required fields ");
+        } catch (HibernateException ex) {
+            log.error("Exception: " + ex.toString());
+        }
         return "ServletPage?command=go_to_admin_orders_received";
     }
 

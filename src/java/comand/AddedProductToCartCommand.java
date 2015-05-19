@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
 import model.entity.Goods;
 import model.factory.Factory;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -20,15 +22,17 @@ import model.factory.Factory;
  */
 public class AddedProductToCartCommand implements ActionCommand {
 
+     private static final Logger log = Logger.getLogger(AddedProductToCartCommand.class);
+     
     @Override
     public String execute(HttpServletRequest request) {
-        String page;
+       try{
         String club[];
         String category;
+        List<Goods> goodsList;
         HttpSession session = request.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         if (cart == null) {
-
             cart = new ShoppingCart();
             session.setAttribute("cart", cart);
         }
@@ -43,14 +47,21 @@ public class AddedProductToCartCommand implements ActionCommand {
             }
         }
 
-        List<Goods> goodsList = new ArrayList();
+        
         category = (String) session.getAttribute("selectedCategory");
         club = (String[]) session.getAttribute("selectedClub");
         goodsList = daoImpl.readByClubCatregory(category, club);
         request.setAttribute("data", goodsList);
         request.setAttribute("goodsAdd", productId);
-        page = "/WEB-INF/view/catalog.jsp";
-        return page;
+        session.setAttribute("location", "website");
+        } catch (NullPointerException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (NumberFormatException ex) {
+            log.error("Exception: " + ex.toString());
+        } catch (HibernateException ex) {
+            log.error("Exception: " + ex.toString());
+        }
+        return "/WEB-INF/view/catalog.jsp";
 
     }
 }

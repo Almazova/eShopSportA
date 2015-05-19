@@ -45,17 +45,17 @@ public class OrderedGoods implements Serializable {
     private Long orderedGoodId;
 
     @ManyToOne
-    @JoinColumn(name = "goods_id")
+    @JoinColumn(name = "goods_id",nullable = false)
     private Goods goods;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id",nullable = false)
     private Orders order;
 
-    @Column(name = "amount")
+    @Column(name = "amount",nullable = false)
     private int amount;
     
-    @Column(name = "price")
+    @Column(name = "price",nullable = false)
     private long price;
 
     public OrderedGoods() {
