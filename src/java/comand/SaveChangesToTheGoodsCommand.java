@@ -6,7 +6,9 @@
 
 package comand;
 
+import helperclasses.RequestParameters;
 import helperclasses.ServletPageCommand;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -27,10 +29,10 @@ public class SaveChangesToTheGoodsCommand implements ActionCommand{
     public String execute(HttpServletRequest request) {
   
         try{
-        String goodsId = request.getParameter("goodsId");
-        String name = request.getParameter("nameGoods");
-        String price = request.getParameter("price");
-        String inf = request.getParameter("inf");       
+        String goodsId = request.getParameter(RequestParameters.GOODS_ID);
+        String name = request.getParameter(RequestParameters.NAME_GOODS);
+        String price = request.getParameter(RequestParameters.PRICE);
+        String inf = request.getParameter(RequestParameters.INFORMATION);       
 
         Goods goods = new Goods();
         DaoImpl daoImpl = Factory.getInstance().getDAO(goods);        
@@ -40,7 +42,7 @@ public class SaveChangesToTheGoodsCommand implements ActionCommand{
         goods.setPriceGoods(Long.parseLong(price));
         daoImpl.update(goods);       
         HttpSession session = request.getSession();        
-        session.setAttribute("location", "admin");
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (IndexOutOfBoundsException ex) {

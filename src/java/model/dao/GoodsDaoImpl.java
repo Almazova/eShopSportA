@@ -5,7 +5,6 @@
  */
 package model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import model.entity.Goods;
 import model.utils.HibernateUtil;
@@ -50,7 +49,7 @@ public class GoodsDaoImpl extends DaoImpl {
                     .list();
 
         } else {
-            goods = session.getNamedQuery("SELECT_BY_TREE_CLUB_AND_CATEGORY")
+            goods = session.getNamedQuery("SELECT_BY_THREE_CLUB_AND_CATEGORY")
                     .setString("nameCategory", category)
                     .setString("nameClub1", club[0])
                     .setString("nameClub2", club[1])

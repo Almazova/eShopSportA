@@ -6,6 +6,9 @@
 package comand;
 
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.RequestParameters;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -28,12 +31,12 @@ public class AddGoodsByAdminCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
 
         try {
-            String nameGoods = request.getParameter("nameGoods");
-            String image = request.getParameter("img");
-            String categoryName = request.getParameter("category");
-            String clubName = request.getParameter("club");
-            String price = request.getParameter("price");
-            String inf = request.getParameter("inf");
+            String nameGoods = request.getParameter(RequestParameters.NAME_GOODS);
+            String image = request.getParameter(RequestParameters.PATH_IMG);
+            String categoryName = request.getParameter(RequestParameters.NAME_CATEGORY);
+            String clubName = request.getParameter(RequestParameters.NAME_CLUB);
+            String price = request.getParameter(RequestParameters.PRICE);
+            String inf = request.getParameter(RequestParameters.INFORMATION);
 
             Category category = new Category();
             DaoImpl daoImpl = Factory.getInstance().getDAO(category);
@@ -47,9 +50,9 @@ public class AddGoodsByAdminCommand implements ActionCommand {
             daoImpl = Factory.getInstance().getDAO(goods);
             daoImpl.create(goods);
 
-            request.setAttribute("added", true);
+            request.setAttribute(RequestAttributes.GOODS_ADDED, true);
             HttpSession session = request.getSession();
-            session.setAttribute("location", "website");
+            session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.WEBSITE);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (IndexOutOfBoundsException ex) {

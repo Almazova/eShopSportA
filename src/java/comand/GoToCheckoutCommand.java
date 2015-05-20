@@ -7,6 +7,7 @@ package comand;
 
 import cart.ShoppingCart;
 import helperclasses.Path;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -23,10 +24,9 @@ public class GoToCheckoutCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         ShoppingCart cart = null;
         try {
-            HttpSession session = request.getSession();
-            session.setAttribute("location", "admin");
-            session.setAttribute("location", "website");
-            cart = (ShoppingCart) session.getAttribute("cart");
+            HttpSession session = request.getSession();            
+            session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.WEBSITE);
+            cart = (ShoppingCart) session.getAttribute(SessionAttributes.CART);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         }

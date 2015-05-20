@@ -7,6 +7,9 @@
 package comand;
 
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.RequestParameters;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -27,12 +30,12 @@ public class EditGoodsByAdminCommand implements ActionCommand{
     public String execute(HttpServletRequest request) {
         try{
         Goods goods = new Goods();   
-        String orderId = request.getParameter("goodsId");
+        String goodsId = request.getParameter(RequestParameters.GOODS_ID);
         DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
-        goods = (Goods) daoImpl.readById(Long.parseLong(orderId));        
-        request.setAttribute("goods", goods);
+        goods = (Goods) daoImpl.readById(Long.parseLong(goodsId));        
+        request.setAttribute(RequestAttributes.GOODS, goods);
         HttpSession session = request.getSession();
-        session.setAttribute("location", "admin");
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         }  catch (HibernateException ex) {

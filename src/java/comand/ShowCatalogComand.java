@@ -7,6 +7,9 @@ package comand;
 
 import helperclasses.CollectionNames;
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.RequestParameters;
+import helperclasses.SessionAttributes;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,14 +37,14 @@ public class ShowCatalogComand implements ActionCommand {
         try{
         Goods goods = new Goods();
         DaoImpl daoImpl = Factory.getInstance().getDAO(goods);        
-        club = request.getParameterValues("club");
-        category = CollectionNames.getNameCategoryByKey(request.getParameter("command"));
+        club = request.getParameterValues(RequestParameters.NAME_CLUB);
+        category = CollectionNames.getNameCategoryByKey(request.getParameter(RequestParameters.COMMAND));
         goodsList = daoImpl.readByClubCatregory(category, club);
-        request.setAttribute("data", goodsList);
+        request.setAttribute(RequestAttributes.GOODS_DATA, goodsList);
         HttpSession session = request.getSession();
-        session.setAttribute("selectedCategory", category);
-        session.setAttribute("selectedClub", club);        
-        session.setAttribute("location", "website"); 
+        session.setAttribute(SessionAttributes.SELECTED_CATEGORY, category);
+        session.setAttribute(SessionAttributes.SELECTED_CLUB, club);        
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.WEBSITE); 
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (IndexOutOfBoundsException ex) {

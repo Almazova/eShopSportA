@@ -6,6 +6,7 @@
 package comand;
 
 import helperclasses.Path;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -23,8 +24,8 @@ public class GoToAdminAddGoodsCommand implements ActionCommand {
         Boolean passwordCheck = false;
         try {
             HttpSession session = request.getSession();
-            session.setAttribute("location", "admin");
-            passwordCheck = (Boolean) session.getAttribute("passwordCheck");
+            session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
+            passwordCheck = (Boolean) session.getAttribute(SessionAttributes.PASSWORD_CHECK);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (NumberFormatException ex) {

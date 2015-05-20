@@ -5,7 +5,10 @@
  */
 package comand;
 
+import helperclasses.RequestAttributes;
+import helperclasses.RequestParameters;
 import helperclasses.ServletPageCommand;
+import helperclasses.SessionAttributes;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,8 +34,8 @@ public class UpdateQuantityByAdminCommand implements ActionCommand {
         try{
         OrderedGoods orderedGoods = new OrderedGoods();
         Orders order = new Orders();       
-        String orderedGoodId = request.getParameter("goodsId");
-        String quantity = request.getParameter("quantity");
+        String orderedGoodId = request.getParameter(RequestParameters.GOODS_ID);
+        String quantity = request.getParameter(RequestParameters.QUANTITY);
         DaoImpl daoImpl = Factory.getInstance().getDAO(orderedGoods);
         if(Integer.parseInt(quantity) == 0){
             orderedGoods = (OrderedGoods) daoImpl.readById(Long.parseLong(orderedGoodId));
@@ -50,9 +53,9 @@ public class UpdateQuantityByAdminCommand implements ActionCommand {
             daoImpl.update(orderedGoods);
         }      
         HttpSession session = request.getSession();        
-        request.setAttribute("orderId",session.getAttribute("orderId"));        
-        session.setAttribute("location", "admin");
-         orderId = (String)session.getAttribute("orderId");
+        request.setAttribute(RequestAttributes.ORDER_ID,session.getAttribute(SessionAttributes.ORDER_ID));        
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
+         orderId = (String)session.getAttribute(SessionAttributes.ORDER_ID);
          } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (IndexOutOfBoundsException ex) {

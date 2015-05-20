@@ -6,6 +6,8 @@
 package comand;
 
 import helperclasses.Path;
+import helperclasses.RequestParameters;
+import helperclasses.SessionAttributes;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,16 +32,16 @@ public class EditOrderByAdminCommand implements ActionCommand {
         Orders order = new Orders();
         OrderedGoods orderedGoods = new OrderedGoods();
         List<OrderedGoods> orderedGoodsList;
-        String orderId = request.getParameter("orderId");
+        String orderId = request.getParameter(RequestParameters.ORDER_ID);
         DaoImpl daoImpl = Factory.getInstance().getDAO(order);
         order = (Orders) daoImpl.readById(Long.parseLong(orderId));
         daoImpl = Factory.getInstance().getDAO(orderedGoods);
         orderedGoodsList = daoImpl.readOrderedGoodsByOrder(Long.parseLong(orderId));
         HttpSession session = request.getSession();
-        session.setAttribute("orderedGoods", orderedGoodsList);
-        session.setAttribute("order", order);
-        session.setAttribute("orderId", orderId);        
-        session.setAttribute("location", "admin");
+        session.setAttribute(SessionAttributes.ORDERED_GOODS, orderedGoodsList);
+        session.setAttribute(SessionAttributes.ORDER, order);
+        session.setAttribute(SessionAttributes.ORDER_ID, orderId);        
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         }  catch (HibernateException ex) {

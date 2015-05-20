@@ -24,6 +24,7 @@ public class CollectionNames {
         map.put("sound_attributes", "Звуковые атрибуты");
         map.put("books_and_media", "Книги и мультимедиа");
         map.put("flags_and_pennants", "Флаги и вымпелы");
+        
     }
 
     public static String getNameCategoryByKey(String key) {

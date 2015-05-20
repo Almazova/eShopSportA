@@ -6,6 +6,8 @@
 package comand;
 
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.SessionAttributes;
 import java.io.File;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -44,9 +46,9 @@ public class OpenImgCommand implements ActionCommand {
                 path = Path.DOWNLOAD_IMG_SHORT + file.getName();
             }
 
-            request.setAttribute("image", path);
+            request.setAttribute(RequestAttributes.IMAGE_PATH, path);
             HttpSession session = request.getSession();
-            session.setAttribute("location", "admin");
+            session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString() + " :Incorrect file path");
         } catch (IndexOutOfBoundsException ex) {

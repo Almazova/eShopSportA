@@ -63,13 +63,13 @@
                                         <td>Имя*</td>
                                         <td>
                                             <input type="hidden" name="clientId" value="${order.client.clientId}">                       
-                                            <input type="text" name="name" id="name" maxlength="15" value="${order.client.nameClient}" />
+                                            <input type="text" name="name" id="name" maxlength="15" value="${order.client.nameClient}" required="true"/>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Фамилия*</td>
                                         <td>
-                                            <input type="text" name="surname" id="surname" maxlength="20" value="${order.client.surnameClient}"/>
+                                            <input type="text" name="surname" id="surname" maxlength="20" value="${order.client.surnameClient}" required="true"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -80,7 +80,7 @@
                                     </tr>
                                     <tr>
                                         <td>Моб. телефон*</td>
-                                        <td><input type="text" name="phone" id="phone" value="${order.client.phoneClient}"/></td>
+                                        <td><input type="text" name="phone" id="phone" value="${order.client.phoneClient}" required="true"/></td>
                                     </tr>
                                     <tr>
                                         <td>Aдрес</td>

@@ -7,6 +7,7 @@
 package comand;
 
 import helperclasses.Path;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -23,7 +24,7 @@ public class ShowCartCommand implements ActionCommand{
     public String execute(HttpServletRequest request) {
         try{
         HttpSession session = request.getSession();
-        session.setAttribute("location", "website");
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.WEBSITE);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         }

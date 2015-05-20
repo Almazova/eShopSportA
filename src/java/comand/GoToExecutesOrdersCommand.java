@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import model.dao.DaoImpl;
 import helperclasses.OrderHelp;
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpSession;
 import model.entity.OrderedGoods;
 import model.factory.Factory;
@@ -37,10 +39,10 @@ public class GoToExecutesOrdersCommand implements ActionCommand {
             orderedGoodsList = daoImpl.readOrderedGoodsByStatus("Выполняется");
             ModifOrder modifOrder = new ModifOrder();
             orderHelpList = modifOrder.getModifOrderList(orderedGoodsList);
-            request.setAttribute("data", orderHelpList);
+            request.setAttribute(RequestAttributes.ORDER_DATA, orderHelpList);
             HttpSession session = request.getSession();
-            session.setAttribute("location", "admin");
-            passwordCheck = (Boolean) session.getAttribute("passwordCheck");
+            session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
+            passwordCheck = (Boolean) session.getAttribute(SessionAttributes.PASSWORD_CHECK);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (HibernateException ex) {

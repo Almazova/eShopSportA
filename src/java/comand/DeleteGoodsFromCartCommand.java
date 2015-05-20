@@ -8,6 +8,8 @@ package comand;
 
 import cart.ShoppingCart;
 import helperclasses.Path;
+import helperclasses.RequestParameters;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -28,13 +30,13 @@ public class DeleteGoodsFromCartCommand implements ActionCommand{
     public String execute(HttpServletRequest request) {
         try{
         HttpSession session = request.getSession();
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");      
-        String productId = request.getParameter("goodsId");       
+        ShoppingCart cart = (ShoppingCart) session.getAttribute(SessionAttributes.CART);      
+        String goodsId = request.getParameter(RequestParameters.GOODS_ID);       
         Goods goods = new Goods();
         DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
-        goods = (Goods) daoImpl.readById(Long.parseLong(productId));
+        goods = (Goods) daoImpl.readById(Long.parseLong(goodsId));
         cart.update(goods, "0");        
-        session.setAttribute("location", "website");
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.WEBSITE);
          } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());        
         } catch (HibernateException ex) {

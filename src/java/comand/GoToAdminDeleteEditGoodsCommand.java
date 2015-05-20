@@ -6,6 +6,8 @@
 package comand;
 
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.SessionAttributes;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,9 +34,9 @@ public class GoToAdminDeleteEditGoodsCommand implements ActionCommand {
             HttpSession session = request.getSession();
             DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
             goodsList = daoImpl.read();
-            request.setAttribute("data", goodsList);
-            session.setAttribute("location", "admin");
-            passwordCheck = (Boolean) session.getAttribute("passwordCheck");
+            request.setAttribute(RequestAttributes.GOODS_DATA, goodsList);
+            session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
+            passwordCheck = (Boolean) session.getAttribute(SessionAttributes.PASSWORD_CHECK);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (HibernateException ex) {

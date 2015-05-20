@@ -7,6 +7,8 @@
 package comand;
 
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.SessionAttributes;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,11 +35,11 @@ public class ContinuedCatalogViewCommand implements ActionCommand{
         DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
         List<Goods> goodsList;
         HttpSession session = request.getSession();
-        category = (String) session.getAttribute("selectedCategory");
-        club = (String[]) session.getAttribute("selectedClub");       
+        category = (String) session.getAttribute(SessionAttributes.SELECTED_CATEGORY);
+        club = (String[]) session.getAttribute(SessionAttributes.SELECTED_CLUB);       
         goodsList = daoImpl.readByClubCatregory(category, club);
-        request.setAttribute("data", goodsList);       
-        session.setAttribute("location", "website");
+        request.setAttribute(RequestAttributes.GOODS_DATA, goodsList);       
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.WEBSITE);
          } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());        
         } catch (HibernateException ex) {

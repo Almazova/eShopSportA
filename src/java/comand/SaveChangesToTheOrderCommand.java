@@ -5,7 +5,9 @@
  */
 package comand;
 
+import helperclasses.RequestParameters;
 import helperclasses.ServletPageCommand;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -28,15 +30,15 @@ public class SaveChangesToTheOrderCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         try{
-        String idClient = request.getParameter("clientId");
-        String idOrder = request.getParameter("ordersId");
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String delivery = request.getParameter("delivery");
-        String payment = request.getParameter("payment");
+        String idClient = request.getParameter(RequestParameters.CLIENT_ID);
+        String idOrder = request.getParameter(RequestParameters.ORDERS_ID);
+        String name = request.getParameter(RequestParameters.NAME_CLIENT);
+        String surname = request.getParameter(RequestParameters.SURNAME_CLIENT);
+        String email = request.getParameter(RequestParameters.EMAIL_CLIENT);
+        String phone = request.getParameter(RequestParameters.PHONE_CLIENT);
+        String address = request.getParameter(RequestParameters.ADDRESS_CLIENT);
+        String delivery = request.getParameter(RequestParameters.NAME_DELIVARY);
+        String payment = request.getParameter(RequestParameters.NAME_PAYMENT);
 
         Client client = new Client();
         DaoImpl daoImpl = Factory.getInstance().getDAO(client);        
@@ -65,7 +67,7 @@ public class SaveChangesToTheOrderCommand implements ActionCommand {
         daoImpl.update(order);
         
         HttpSession session = request.getSession();        
-        session.setAttribute("location", "admin");
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (IndexOutOfBoundsException ex) {

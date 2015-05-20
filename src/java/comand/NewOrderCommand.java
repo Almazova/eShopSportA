@@ -8,6 +8,8 @@ package comand;
 import cart.ShoppingCart;
 import cart.ShoppingCartItem;
 import helperclasses.Path;
+import helperclasses.RequestParameters;
+import helperclasses.SessionAttributes;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,13 +41,13 @@ public class NewOrderCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
    
         List<OrderedGoods>  orderedGoodsList = new ArrayList();
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String delivery = request.getParameter("delivery");
-        String payment = request.getParameter("payment");
+        String name = request.getParameter(RequestParameters.NAME_CLIENT);
+        String surname = request.getParameter(RequestParameters.SURNAME_CLIENT);
+        String email = request.getParameter(RequestParameters.EMAIL_CLIENT);
+        String phone = request.getParameter(RequestParameters.PHONE_CLIENT);
+        String address = request.getParameter(RequestParameters.ADDRESS_CLIENT);
+        String delivery = request.getParameter(RequestParameters.NAME_DELIVARY);
+        String payment = request.getParameter(RequestParameters.NAME_PAYMENT);
 
         try{
         Client client = new Client(surname,name,  email, phone, address);
@@ -74,7 +76,7 @@ public class NewOrderCommand implements ActionCommand {
         daoImpl.create(order);
         
         HttpSession session = request.getSession();
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        ShoppingCart cart = (ShoppingCart) session.getAttribute(SessionAttributes.CART);
         cart.calculateTotal(deliveryMethod.getPriceDm());
         List<ShoppingCartItem> shoppingCartItem = cart.getItems();       
         for (ShoppingCartItem shoppingCartItem1 : shoppingCartItem) {
@@ -84,9 +86,9 @@ public class NewOrderCommand implements ActionCommand {
             daoImpl.create(orderedGoods);
             orderedGoodsList.add(orderedGoods);
         }
-        session.setAttribute("orderedGoods", orderedGoodsList);
-        session.setAttribute("total", cart.getTotal());        
-        session.setAttribute("location", "website");
+        session.setAttribute(SessionAttributes.ORDERED_GOODS, orderedGoodsList);
+        session.setAttribute(SessionAttributes.TOTAL_SUMMA, cart.getTotal());        
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.WEBSITE);
         cart.clear();
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());

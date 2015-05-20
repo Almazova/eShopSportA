@@ -7,6 +7,9 @@ package comand;
 
 import helperclasses.Password;
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.RequestParameters;
+import helperclasses.SessionAttributes;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,11 +31,11 @@ public class PasswordCheckCommand implements ActionCommand {
 
         boolean passwordCheck = false;
         try {
-            String pass = request.getParameter("password");
+            String pass = request.getParameter(RequestParameters.PASSWORD);
             Password password = new Password();
             passwordCheck = password.passwordCheck(pass);
             HttpSession session = request.getSession();
-            session.setAttribute("location", "admin");
+            session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
         } catch (ParserConfigurationException exception) {
             log.error("Exception: " + exception.toString());
         } catch (SAXException exception) {
@@ -46,10 +49,10 @@ public class PasswordCheckCommand implements ActionCommand {
         }
         if (passwordCheck) {
             HttpSession session = request.getSession();
-            session.setAttribute("passwordCheck", true);
+            session.setAttribute(SessionAttributes.PASSWORD_CHECK, true);
             return Path.ADMIN_MAIN;
         } else {
-            request.setAttribute("pass", true);
+            request.setAttribute(RequestAttributes.PASSWORD_IS_NOT_CORRECT, true);
             return Path.ADMIN_PASSWORD_CHECK;
         }
 

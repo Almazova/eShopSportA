@@ -7,6 +7,9 @@ package comand;
 
 import cart.ShoppingCart;
 import helperclasses.Path;
+import helperclasses.RequestAttributes;
+import helperclasses.RequestParameters;
+import helperclasses.SessionAttributes;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,29 +34,28 @@ public class AddedProductToCartCommand implements ActionCommand {
         String category;
         List<Goods> goodsList;
         HttpSession session = request.getSession();
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        ShoppingCart cart = (ShoppingCart) session.getAttribute(SessionAttributes.CART);
         if (cart == null) {
             cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
+            session.setAttribute(SessionAttributes.CART, cart);
         }
-        String productId = request.getParameter("goodsId");
+        String goodsId = request.getParameter(RequestParameters.GOODS_ID);
         Goods goods = new Goods();
         DaoImpl daoImpl = Factory.getInstance().getDAO(goods);
 
-        if (!productId.isEmpty()) {
-            goods = (Goods) daoImpl.readById(Long.parseLong(productId));
+        if (!goodsId.isEmpty()) {
+            goods = (Goods) daoImpl.readById(Long.parseLong(goodsId));
             if (!goods.isDeleted()) {
                 cart.addItem(goods);
             }
         }
-
         
-        category = (String) session.getAttribute("selectedCategory");
-        club = (String[]) session.getAttribute("selectedClub");
+        category = (String) session.getAttribute(SessionAttributes.SELECTED_CATEGORY);
+        club = (String[]) session.getAttribute(SessionAttributes.SELECTED_CLUB);
         goodsList = daoImpl.readByClubCatregory(category, club);
-        request.setAttribute("data", goodsList);
-        request.setAttribute("goodsAdd", productId);
-        session.setAttribute("location", "website");
+        request.setAttribute(RequestAttributes.GOODS_DATA, goodsList);
+        request.setAttribute(RequestAttributes.GOODS_ID_ADD, goodsId);
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.WEBSITE);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (NumberFormatException ex) {

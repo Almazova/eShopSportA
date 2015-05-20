@@ -6,7 +6,9 @@
 
 package comand;
 
+import helperclasses.RequestParameters;
 import helperclasses.ServletPageCommand;
+import helperclasses.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -29,7 +31,7 @@ public class RejectionTheOrderCommand implements ActionCommand {
         try{
         Orders order = new Orders();
         OrderedGoods orderedGoods = new OrderedGoods();        
-        String orderId = request.getParameter("orderId");
+        String orderId = request.getParameter(RequestParameters.ORDER_ID);
         DaoImpl daoImpl = Factory.getInstance().getDAO(order);
         Orders confirmOrder = (Orders) daoImpl.readById(Long.parseLong(orderId));
         daoImpl = Factory.getInstance().getDAO(orderedGoods);
@@ -37,7 +39,7 @@ public class RejectionTheOrderCommand implements ActionCommand {
         daoImpl = Factory.getInstance().getDAO(order);        
         daoImpl.delete(confirmOrder);
         HttpSession session = request.getSession();        
-        session.setAttribute("location", "admin");
+        session.setAttribute(SessionAttributes.LOCATION_OF_SITE, SessionAttributes.ADMINISTRATIVE_PART);
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         } catch (IndexOutOfBoundsException ex) {
