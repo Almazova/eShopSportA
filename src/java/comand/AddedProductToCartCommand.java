@@ -6,7 +6,7 @@
 package comand;
 
 import cart.ShoppingCart;
-import java.util.ArrayList;
+import helperclasses.Path;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -61,7 +61,7 @@ public class AddedProductToCartCommand implements ActionCommand {
         } catch (HibernateException ex) {
             log.error("Exception: " + ex.toString());
         }
-        return "/WEB-INF/view/catalog.jsp";
+        return Path.CATALOG;
 
     }
 }

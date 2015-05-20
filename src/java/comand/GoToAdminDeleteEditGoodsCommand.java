@@ -5,6 +5,7 @@
  */
 package comand;
 
+import helperclasses.Path;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,9 +43,9 @@ public class GoToAdminDeleteEditGoodsCommand implements ActionCommand {
             log.error("Exception: " + ex.toString());
         }
         if (passwordCheck.booleanValue() == true) {
-            return "/WEB-INF/view/adminDeleteEditGoods.jsp";
+            return Path.ADMIN_DELETE_EDIT_GOODS;
         }
-        return "/WEB-INF/view/adminPasswordCheck.jsp";
+        return Path.ADMIN_PASSWORD_CHECK;
 
     }
 

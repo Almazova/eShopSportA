@@ -51,13 +51,10 @@ public class ServletPage extends HttpServlet {
                     = request.getRequestDispatcher(page);
             dispatcher.forward(request, response);
         } else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
 
-            // установка страницы c cообщением об ошибке
-//            page = ConfigurationManager.getProperty("path.page.index");
-//            request.getSession().setAttribute("nullPage",
-//                    MessageManager.getProperty("message.nullpage"));
-//            response.sendRedirect(request.getContextPath() + page);
         }
+        
     }
 
     @Override
@@ -75,6 +72,6 @@ public class ServletPage extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

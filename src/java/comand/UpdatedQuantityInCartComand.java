@@ -6,6 +6,7 @@
 package comand;
 
 import cart.ShoppingCart;
+import helperclasses.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -46,6 +47,6 @@ public class UpdatedQuantityInCartComand implements ActionCommand {
             log.error("Exception: " + ex.toString());
         }
 
-        return "/WEB-INF/view/cart.jsp";
+        return Path.CART;
     }
 }

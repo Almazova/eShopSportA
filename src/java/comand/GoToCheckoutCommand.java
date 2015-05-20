@@ -6,6 +6,7 @@
 package comand;
 
 import cart.ShoppingCart;
+import helperclasses.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -30,11 +31,11 @@ public class GoToCheckoutCommand implements ActionCommand {
             log.error("Exception: " + ex.toString());
         }
         if (cart == null) {
-            return "/WEB-INF/view/cart.jsp";
+            return Path.CART;
         } else if (cart.getNumberOfItems() == 0) {
-            return "/WEB-INF/view/cart.jsp";
+            return Path.CART;
         }
-        return "/WEB-INF/view/checkout.jsp";
+        return Path.CHECKOUT;
     }
 
 }

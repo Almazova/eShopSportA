@@ -5,6 +5,7 @@
  */
 package comand;
 
+import helperclasses.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -26,7 +27,7 @@ public class LogoutAdminCommand implements ActionCommand {
         } catch (NullPointerException ex) {
             log.error("Exception: " + ex.toString());
         }
-        return "/WEB-INF/view/adminPasswordCheck.jsp";
+        return Path.ADMIN_PASSWORD_CHECK;
     }
 
 }

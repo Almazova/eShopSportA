@@ -5,6 +5,8 @@
  */
 package comand;
 
+import helperclasses.Path;
+import helperclasses.ServletPageCommand;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -19,7 +21,7 @@ public class EmptyCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String location = "";
+        String location = null;
         try {
             HttpSession session = request.getSession();
             location = (String) session.getAttribute("location");
@@ -29,9 +31,9 @@ public class EmptyCommand implements ActionCommand {
             log.error("Exception: " + ex.toString());
         }
         if ("admin".equals(location)) {
-            return "ServletPage?command=go_to_admin_main_page";
+            return ServletPageCommand.ADMIN_MAIN_PAGE;
         }
-        return "/index.jsp";
+        return Path.INDEX;
 
     }
 

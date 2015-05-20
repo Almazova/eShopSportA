@@ -5,6 +5,7 @@
  */
 package comand;
 
+import helperclasses.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -33,9 +34,9 @@ public class GoToAdminMainPageCommand implements ActionCommand {
         if (passwordCheck == null) {
             session.setAttribute("passwordCheck", false);
         } else if (passwordCheck.booleanValue()) {
-            return "/WEB-INF/view/adminMain.jsp";
+            return Path.ADMIN_MAIN;
         }
-        return "/WEB-INF/view/adminPasswordCheck.jsp";
+        return Path.ADMIN_PASSWORD_CHECK;
     }
 
 }

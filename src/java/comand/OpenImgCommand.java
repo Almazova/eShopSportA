@@ -5,6 +5,7 @@
  */
 package comand;
 
+import helperclasses.Path;
 import java.io.File;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,7 +28,7 @@ public class OpenImgCommand implements ActionCommand {
         String path = "";
         try {
             JFileChooser fileopen = new JFileChooser();
-            File dir = new File("C:\\Users\\asus\\Documents\\NetBeansProjects\\EShopSportsAttributes\\web\\img\\download");
+            File dir = new File(Path.DOWNLOAD_IMG);
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
                     "JPG GIF PNG Images", "jpg", "gif", "png");
             fileopen.setFileFilter(filter);
@@ -40,7 +41,7 @@ public class OpenImgCommand implements ActionCommand {
 
             if (ret == JFileChooser.APPROVE_OPTION) {
                 file = fileopen.getSelectedFile();
-                path = "img\\download\\" + file.getName();
+                path = Path.DOWNLOAD_IMG_SHORT + file.getName();
             }
 
             request.setAttribute("image", path);
@@ -57,7 +58,7 @@ public class OpenImgCommand implements ActionCommand {
         }catch (IllegalArgumentException ex) {
             log.error("Exception: " + ex.toString()+" :Extensions must be non-null and not empty");
         }
-        return "/WEB-INF/view/adminAddGoods.jsp";
+        return Path.ADMIN_ADD_GOODS;
 
     }
 

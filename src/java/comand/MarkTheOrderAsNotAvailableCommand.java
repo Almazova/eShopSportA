@@ -5,7 +5,7 @@
  */
 
 package comand;
-
+import helperclasses.ServletPageCommand;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -42,7 +42,7 @@ public class MarkTheOrderAsNotAvailableCommand implements ActionCommand{
         } catch (NumberFormatException ex) {
             log.error("Exception: " + ex.toString());
         }
-        return "ServletPage?command=go_to_admin_delete_edit_goods";
+        return ServletPageCommand.ADMIN_DELETE_EDIT_GOODS;
     }
     
 }

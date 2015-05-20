@@ -5,6 +5,7 @@
  */
 package comand;
 
+import helperclasses.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -58,7 +59,7 @@ public class AddGoodsByAdminCommand implements ActionCommand {
         } catch (NumberFormatException ex) {
             log.error("Exception: " + ex.toString());
 }
-        return "/WEB-INF/view/adminAddGoods.jsp";
+        return Path.ADMIN_ADD_GOODS;
     }
 
 }

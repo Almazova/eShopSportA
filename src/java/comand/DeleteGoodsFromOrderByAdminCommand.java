@@ -5,6 +5,8 @@
  */
 package comand;
 
+import helperclasses.Path;
+import helperclasses.ServletPageCommand;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,7 +54,7 @@ public class DeleteGoodsFromOrderByAdminCommand implements ActionCommand {
         } catch (NumberFormatException ex) {
             log.error("Exception: " + ex.toString());
         }
-        return "ServletPage?command=edit_order_by_admin&orderId=" + orderId;
+        return ServletPageCommand.ADMIN_ORDER_EDIT_BY_ORDERID + orderId;
     }
 
 }

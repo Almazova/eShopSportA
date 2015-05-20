@@ -6,6 +6,7 @@
 
 package comand;
 
+import helperclasses.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -39,7 +40,7 @@ public class EditGoodsByAdminCommand implements ActionCommand{
         } catch (NumberFormatException ex) {
             log.error("Exception: " + ex.toString());
         }
-        return "/WEB-INF/view/adminEditGoods.jsp";       
+        return Path.ADMIN_EDIT_GOODS;       
     }
     
 }

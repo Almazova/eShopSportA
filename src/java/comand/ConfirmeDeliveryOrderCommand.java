@@ -5,6 +5,8 @@
  */
 package comand;
 
+import helperclasses.Path;
+import helperclasses.ServletPageCommand;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.dao.DaoImpl;
@@ -47,7 +49,7 @@ public class ConfirmeDeliveryOrderCommand implements ActionCommand {
         } catch (NumberFormatException ex) {
             log.error("Exception: " + ex.toString());
         }
-        return "ServletPage?command=go_to_executes_orders";
+        return ServletPageCommand.EXECUTES_ORDERS;
     }
 
 }

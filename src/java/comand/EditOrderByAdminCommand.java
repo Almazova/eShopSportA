@@ -5,6 +5,7 @@
  */
 package comand;
 
+import helperclasses.Path;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,7 +47,7 @@ public class EditOrderByAdminCommand implements ActionCommand {
         } catch (NumberFormatException ex) {
             log.error("Exception: " + ex.toString());
         }
-        return "/WEB-INF/view/adminEditOrder.jsp";
+        return Path.ADMIN_EDIT_ORDER;
     }
 
 }

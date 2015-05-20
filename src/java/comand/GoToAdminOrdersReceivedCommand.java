@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import model.dao.DaoImpl;
 import helperclasses.OrderHelp;
+import helperclasses.Path;
 import javax.servlet.http.HttpSession;
 import model.entity.OrderedGoods;
 import model.factory.Factory;
@@ -48,9 +49,9 @@ public class GoToAdminOrdersReceivedCommand implements ActionCommand {
             log.error("Exception: " + ex.toString());
         }
         if (passwordCheck.booleanValue() == true) {
-            return "/WEB-INF/view/adminOrdersReceived.jsp";
+            return Path.ADMIN_ORDERS_RECEIVED;
         }
-        return "/WEB-INF/view/adminPasswordCheck.jsp";
+        return Path.ADMIN_PASSWORD_CHECK;
 
     }
 

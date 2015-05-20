@@ -114,7 +114,15 @@
                                         <td>Способ оплаты</td>
                                         <td>
                                             <select name="payment">
-                                                <option value="${order.paymentMethod.namePm}"> ${order.paymentMethod.namePm} </option>                                                     
+                                                <option value="${order.paymentMethod.namePm}"> ${order.paymentMethod.namePm} </option> 
+                                                <c:choose>
+                                                    <c:when test="${order.paymentMethod.namePm == 'Наличные'}">
+                                                        <option id="courier" value="Платежная карта"> Платежная карта</option> 
+                                                    </c:when>
+                                                    <c:otherwise>                                                 
+                                                        <option id="export" value="Наличные"> Наличные </option>   
+                                                        </c:otherwise> 
+                                                </c:choose>
                                             </select>
                                         </td>
                                     </tr>

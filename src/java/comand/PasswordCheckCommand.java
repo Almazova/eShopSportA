@@ -6,6 +6,7 @@
 package comand;
 
 import helperclasses.Password;
+import helperclasses.Path;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,10 +47,10 @@ public class PasswordCheckCommand implements ActionCommand {
         if (passwordCheck) {
             HttpSession session = request.getSession();
             session.setAttribute("passwordCheck", true);
-            return "/WEB-INF/view/adminMain.jsp";
+            return Path.ADMIN_MAIN;
         } else {
             request.setAttribute("pass", true);
-            return "/WEB-INF/view/adminPasswordCheck.jsp";
+            return Path.ADMIN_PASSWORD_CHECK;
         }
 
     }

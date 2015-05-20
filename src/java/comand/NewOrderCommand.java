@@ -7,6 +7,7 @@ package comand;
 
 import cart.ShoppingCart;
 import cart.ShoppingCartItem;
+import helperclasses.Path;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -97,8 +98,8 @@ public class NewOrderCommand implements ActionCommand {
             log.error("Exception: " + ex.toString());
         }
         if(orderedGoodsList.isEmpty())
-            return "/index.jsp";
-        return "/WEB-INF/view/readyOrder.jsp";
+            return Path.INDEX;
+        return Path.READY_ORDER;
 
     }
 
