@@ -5,8 +5,8 @@
  */
 package servlets;
 
-import comand.ActionCommand;
-import comand.ActionFactory;
+import command.ActionCommand;
+import command.ActionFactory;
 import java.io.File;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
