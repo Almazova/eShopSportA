@@ -5,6 +5,38 @@
  */
 package command;
 
+import command.admincommand.OpenImgCommand;
+import command.admincommand.MarkTheOrderAsNotAvailableCommand;
+import command.admincommand.GoToAdminDeleteEditGoodsCommand;
+import command.admincommand.SaveChangesToTheOrderCommand;
+import command.admincommand.EditOrderByAdminCommand;
+import command.admincommand.SaveChangesToTheGoodsCommand;
+import command.admincommand.RejectionTheOrderCommand;
+import command.admincommand.LogoutAdminCommand;
+import command.admincommand.UpdateQuantityByAdminCommand;
+import command.admincommand.GoToExecutesOrdersCommand;
+import command.generalcommand.PasswordCheckCommand;
+import command.admincommand.GoToAdminOrdersReceivedCommand;
+import command.admincommand.ConfirmationOfOrderCommand;
+import command.admincommand.EditGoodsByAdminCommand;
+import command.admincommand.GoToAdminAddGoodsCommand;
+import command.admincommand.DeleteGoodsFromOrderByAdminCommand;
+import command.admincommand.MarkTheOrderAsInStockCommand;
+import command.admincommand.GoToAdminMainPageCommand;
+import command.generalcommand.GoToWebsiteMainPageCommand;
+import command.admincommand.AddGoodsByAdminCommand;
+import command.admincommand.RejectionDeliveryOfOrderCommand;
+import command.admincommand.ConfirmeDeliveryOrderCommand;
+import command.clientsitecommand.NewOrderCommand;
+import command.clientsitecommand.AddedProductToCartCommand;
+import command.clientsitecommand.UpdatedQuantityInCartComand;
+import command.clientsitecommand.DeleteGoodsFromCartCommand;
+import command.clientsitecommand.CleaningCartCommand;
+import command.clientsitecommand.ShowCatalogComand;
+import command.clientsitecommand.ShowCartCommand;
+import command.clientsitecommand.ContinuedCatalogViewCommand;
+import command.clientsitecommand.GoToCheckoutCommand;
+
 /**
  *
  * @author asus

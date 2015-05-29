@@ -5,6 +5,7 @@
  */
 package command;
 
+import command.generalcommand.EmptyCommand;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
