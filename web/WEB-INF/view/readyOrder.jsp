@@ -1,7 +1,7 @@
 <%-- 
     Document   : readyOrder
     Created on : 11.05.2015, 19:09:07
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <div id="left">    

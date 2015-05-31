@@ -1,7 +1,7 @@
 <%-- 
     Document   : 404
     Created on : 20.05.2015, 10:14:42
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -32,11 +32,11 @@
                                 Выберите клуб:
                             </td>
                         </tr>
-                        <tr><td><img src="img/chelsea.jpg" width="50"></td>
+                        <tr><td><img src="img/chelsea/chelsea1.jpg" width="50"></td>
                             <td><input type="checkbox" name="club" value="Chelsea" >Chelsea<Br></td></tr>
-                        <tr><td><img  src="img/manchester.png" width="50"></td>
+                        <tr><td><img  src="img/manchester/manchester.png" width="50"></td>
                             <td><input type="checkbox" name="club" value="Manchester United">Manchester United<Br></td></tr>
-                        <tr><td><img src="img/arsenal.jpg" width="50"></td>
+                        <tr><td><img src="img/arsenal/arsenal.jpg" width="50"></td>
                             <td><input type="checkbox" name="club" value="Arsenal">Arsenal<Br> </td>  </tr>        
 
                     </table>    

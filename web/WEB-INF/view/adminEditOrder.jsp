@@ -1,7 +1,7 @@
 <%-- 
     Document   : adminEdditOrder
     Created on : 16.05.2015, 17:40:55
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

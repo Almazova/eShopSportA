@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 20.04.2015, 20:25:58
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>

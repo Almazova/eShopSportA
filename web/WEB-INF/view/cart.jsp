@@ -1,7 +1,7 @@
 <%-- 
     Document   : cart
     Created on : 03.05.2015, 23:45:19
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <div id="left">    

@@ -1,7 +1,7 @@
 <%-- 
     Document   : adminDeleteEditGoods
     Created on : 17.05.2015, 13:14:31
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

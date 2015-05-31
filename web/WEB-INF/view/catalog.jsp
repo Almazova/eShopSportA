@@ -1,7 +1,7 @@
 <%-- 
     Document   : DataPage
     Created on : 21.04.2015, 15:17:03
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/valid.js"></script>

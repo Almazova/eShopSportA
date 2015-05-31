@@ -1,7 +1,7 @@
 <%-- 
     Document   : adminOrdersReceived
     Created on : 15.05.2015, 12:33:40
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

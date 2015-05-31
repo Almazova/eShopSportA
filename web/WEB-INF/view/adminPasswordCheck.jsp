@@ -1,7 +1,7 @@
 <%-- 
     Document   : adminPasswordCheck
     Created on : 19.05.2015, 0:06:53
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

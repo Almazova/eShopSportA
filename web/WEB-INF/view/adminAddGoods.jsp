@@ -1,7 +1,7 @@
 <%-- 
     Document   : adminAddGoods
     Created on : 17.05.2015, 17:06:01
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

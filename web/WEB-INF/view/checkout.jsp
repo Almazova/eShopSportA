@@ -1,7 +1,7 @@
 <%-- 
     Document   : checkout
     Created on : 06.05.2015, 0:30:22
-    Author     : asus
+    Author     : Katya Omelyashchik
 --%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/valid.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-2.1.1.min.js"></script>
